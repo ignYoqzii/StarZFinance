@@ -1,0 +1,86 @@
+﻿<Window x:Class="StarZFinance.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StarZFinance"
+        mc:Ignorable="d"
+        Title="StarZ Finance" MinHeight="560" MinWidth="900" SnapsToDevicePixels="True" WindowState="Normal" Height="560" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" Background="Transparent" WindowStyle="None" AllowsTransparency="True" Loaded="Window_Loaded" d:DesignHeight="560" d:DesignWidth="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Frame x:Name="OpeningAnimation" Panel.ZIndex="4" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+        <Border x:Name="MainWindowBackground" Background="{DynamicResource PrimaryBackgroundColor}" Grid.RowSpan="2" Grid.ColumnSpan="2" CornerRadius="30" BorderThickness="0"/>
+        <Grid Grid.Row="0" Grid.Column="1" Panel.ZIndex="1" Margin="0,15,15,15" MouseLeftButtonDown="TopBar_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Border x:Name="TopBarBackground" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="30" Grid.ColumnSpan="4" BorderThickness="0"/>
+            <TextBlock x:Name="PageTextBlock" Grid.Column="0" Text="Overview" FontSize="20" FontFamily="Outfit" FontWeight="Light" Foreground="{DynamicResource TextColor}" VerticalAlignment="Center" Margin="20,0,0,0" HorizontalAlignment="Left"/>
+            <Rectangle x:Name="CloseButton" Style="{DynamicResource IconsStyle}" Grid.Column="3" Margin="0,0,15,0" Height="25" Width="25" MouseLeftButtonDown="CloseButton_Click">
+                <Rectangle.OpacityMask>
+                    <ImageBrush ImageSource="/Resources/Close.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+            <Rectangle x:Name="MaximizeButton" Style="{DynamicResource IconsStyle}" Grid.Column="2" Margin="0,0,15,0" Height="25" Width="25" MouseLeftButtonDown="MaximizeButton_Click" >
+                <Rectangle.OpacityMask>
+                    <ImageBrush ImageSource="/Resources/Maximize.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+            <Rectangle x:Name="MinimizeButton" Style="{DynamicResource IconsStyle}" Grid.Column="1" Margin="0,0,15,0" Height="25" Width="25" MouseLeftButtonDown="MinimizeButton_Click" >
+                <Rectangle.OpacityMask>
+                    <ImageBrush ImageSource="/Resources/Minimize.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Grid>
+        <Border x:Name="SideBarBackground" Background="{DynamicResource SecondaryBackgroundColor}" Grid.Column="0" Grid.RowSpan="2" CornerRadius="30" Margin="15" BorderThickness="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Rectangle x:Name="StarZLogoPart1" Fill="{DynamicResource AccentColor}" RenderOptions.BitmapScalingMode="HighQuality" Height="30" Width="30" Grid.Row="0" Margin="0,20,0,0">
+                    <Rectangle.OpacityMask>
+                        <ImageBrush ImageSource="/Resources/StarZLogoBluePart.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+                <Rectangle x:Name="StarZLogoPart2" Fill="{DynamicResource IconColor}" RenderOptions.BitmapScalingMode="HighQuality" Height="30" Width="30" Grid.Row="0" Margin="0,20,0,0">
+                    <Rectangle.OpacityMask>
+                        <ImageBrush ImageSource="/Resources/StarZLogoWhitePart.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+                <ListBox Grid.Row="1" Background="Transparent" SelectionMode="Single" VerticalContentAlignment="Stretch" SelectionChanged="SideBar_SelectionChanged" x:Name="SideBar" BorderThickness="0" Margin="10,20">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="60"/>
+                                    <RowDefinition Height="60"/>
+                                    <RowDefinition Height="60"/>
+                                    <RowDefinition Height="*"/>
+                                    <!-- Space between settings and the other icons -->
+                                    <RowDefinition Height="40"/>
+                                </Grid.RowDefinitions>
+                            </Grid>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <local:NavigationButton NavigationLink="/Pages/Home.xaml" Grid.Row="0" Margin="0" Icon="/Resources/Home.png" Tag="Home"/>
+                    <local:NavigationButton NavigationLink="/Pages/Dashboard.xaml" Grid.Row="1" Margin="0" Icon="/Resources/Dashboard.png" Tag="Dashboard"/>
+                    <local:NavigationButton NavigationLink="/Pages/News.xaml" Grid.Row="2" Height="25" Width="25" Margin="0" Icon="/Resources/News.png" Tag="News"/>
+                    <local:NavigationButton NavigationLink="/Pages/Settings.xaml" Grid.Row="4" Margin="0" Icon="/Resources/Settings.png" Tag="Settings"/>
+                </ListBox>
+            </Grid>
+        </Border>
+        <Frame x:Name="NavigationFrame" Grid.Column="1" Grid.Row="1"  NavigationUIVisibility="Hidden" Background="Transparent"/>
+    </Grid>
+</Window>

@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <StartupObject>StarZFinance.App</StartupObject>
+    <ApplicationIcon>Resources\starz.ico</ApplicationIcon>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="Resources/StarZLogo.png" />
+		<None Remove="Resources/StarZLogoBluePart.png" />
+		<None Remove="Resources/StarZLogoWhitePart.png" />
+		<None Remove="Resources/Minimize.png" />
+		<None Remove="Resources/Close.png" />
+		<None Remove="Resources/Maximize.png" />
+		<None Remove="Resources/Home.png" />
+		<None Remove="Resources/Dashbaord.png" />
+		<None Remove="Resources/News.png" />
+		<None Remove="Resources/Settings.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Resources/starz.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Resources/StarZLogo.png" />
+		<Resource Include="Resources/StarZLogoBluePart.png" />
+		<Resource Include="Resources/StarZLogoWhitePart.png" />
+		<Resource Include="Resources/Minimize.png" />
+		<Resource Include="Resources/Close.png" />
+		<Resource Include="Resources/Maximize.png" />
+		<Resource Include="Resources/Home.png" />
+		<Resource Include="Resources/Dashboard.png" />
+		<Resource Include="Resources/News.png" />
+		<Resource Include="Resources/Settings.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Classes\" />
+	</ItemGroup>
+
+</Project>
