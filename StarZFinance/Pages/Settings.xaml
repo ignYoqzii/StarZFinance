@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="485" d:DesignWidth="810"
       Title="Settings">
-
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

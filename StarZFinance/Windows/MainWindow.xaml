@@ -84,6 +84,6 @@
         <!-- Tab Pages Frame -->
         <Frame x:Name="NavigationFrame" Grid.Column="1" Grid.Row="1"  NavigationUIVisibility="Hidden" Background="Transparent"/>
         <!-- To darken the window when displaying a MessageBox or a dialog -->
-        <Border x:Name="WindowPopUpOverlay" Panel.ZIndex="2" Visibility="Collapsed" Grid.RowSpan="2" Opacity="0.7" Grid.ColumnSpan="2" CornerRadius="20" Background="Black"/>
+        <Border x:Name="WindowPopUpOverlay" Panel.ZIndex="2" Visibility="Collapsed" Grid.RowSpan="2" Opacity="0.7" Grid.ColumnSpan="2" CornerRadius="30" Background="Black"/>
     </Grid>
 </Window>
