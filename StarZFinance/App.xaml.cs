@@ -1,15 +1,9 @@
 ﻿using StarZFinance.Classes;
-using System.Configuration;
-using System.Data;
 using System.IO;
-using System.Net;
 using System.Windows;
 
 namespace StarZFinance
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : System.Windows.Application
     {
 
@@ -23,12 +17,21 @@ namespace StarZFinance
             try
             {
                 string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string starZFinancePath = Path.Combine(documentsPath, "StarZ Finance");;
-                string logsPath = Path.Combine(starZFinancePath, "Logs");
+                string starzFinancePath = Path.Combine(documentsPath, "StarZ Finance");;
+                string logsPath = Path.Combine(starzFinancePath, "Logs");
+                string themePath = Path.Combine(starzFinancePath, "Theme");
 
-                EnsureDirectoryExists(starZFinancePath);
+                EnsureDirectoryExists(starzFinancePath);
                 EnsureDirectoryExists(logsPath);
+                EnsureDirectoryExists(themePath);
+            }
+            catch (Exception ex)
+            {
+                LogsManager.Log($"Error creating application's directory: {ex.Message}", logFileName);
+            }
 
+            try
+            {
                 if (!HasRun)
                 {
                     bool discordRPC = ConfigManager.GetDiscordRPC();
@@ -41,13 +44,23 @@ namespace StarZFinance
                     }
                     else
                     {
-                        LogsManager.Log("Could not initialize Discord Rich Presence. This is either because Discord RPC was disabled or Offline Mode is enabled.", logFileName);
+                        LogsManager.Log("Could not initialize Discord Rich Presence. Discord RPC is disabled", logFileName);
                     }
                 }
             }
             catch (Exception ex)
             {
-                LogsManager.Log($"Error during application startup: {ex.Message}", logFileName);
+                LogsManager.Log($"Error initializing Discord Rich Presence: {ex.Message}", logFileName);
+            }
+
+            try
+            {
+                ThemesManager.SetAndInitializeThemes();
+                LogsManager.Log("Themes loaded and initialized.", logFileName);
+            }
+            catch (Exception ex)
+            {
+                LogsManager.Log($"Error loading application's theme: {ex.Message}", logFileName);
             }
         }
 
@@ -65,11 +78,12 @@ namespace StarZFinance
             try
             {
                 DiscordRichPresenceManager.TerminatePresence();
+                // More can be added
                 LogsManager.Log("Application exited successfully.", logFileName);
             }
             catch (Exception ex)
             {
-                LogsManager.Log($"Error during application exit: {ex.Message}", logFileName);
+                LogsManager.Log($"Error during application's exit: {ex.Message}", logFileName);
             }
         }
     }

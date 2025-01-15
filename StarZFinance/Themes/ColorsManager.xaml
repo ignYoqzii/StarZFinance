@@ -9,7 +9,7 @@
     <SolidColorBrush x:Key="SideBarBackgroundColor" Color="#0d0d0d" />
     <SolidColorBrush x:Key="TextColor" Color="#ffffff" />
     <SolidColorBrush x:Key="IconColor" Color="#ffffff" />
-    <SolidColorBrush x:Key="ProgressBarBackgroundColor" Color="#ffffff" />
+    <SolidColorBrush x:Key="SideBarIconColor" Color="#ffffff" />
 
     <LinearGradientBrush x:Key="AccentColor" StartPoint="0.5,0" EndPoint="0.5,1" SpreadMethod="Pad" MappingMode="RelativeToBoundingBox">
         <GradientStop Color="#FF0044EA" Offset="0.0" />

@@ -11,101 +11,164 @@
         Topmost="True"
         WindowStartupLocation="CenterScreen"
         Title="Colors Manager"
-        Height="400"
+        Height="450"
         Width="420"
         AllowsTransparency="True"
         Background="Transparent">
 
     <Grid>
-        <Border BorderThickness="0" Panel.ZIndex="1" Background="{DynamicResource SecondaryBackgroundColor}" Opacity="0.7" CornerRadius="10" Margin="21,349,21,14">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="20" Opacity="0.3" RenderingBias="Performance" ShadowDepth="5"/>
-            </Border.Effect>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Panel.ZIndex="-1" RadiusX="20" RadiusY="20" Fill="{DynamicResource PrimaryBackgroundColor}" Opacity="1" Stroke="AliceBlue" Grid.RowSpan="8" StrokeThickness="0"/>
+        <Border BorderThickness="0" Grid.Row="0" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="20" Margin="10,10,10,5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Accent Color" FontSize="20" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Left" Margin="20,0,0,0" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}"/>
+                <TextBlock Text="First Color" FontSize="15" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Left" Margin="20,0,0,0" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}"/>
+                <TextBlock Text="Second Color" FontSize="15" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Left" Margin="20,0,0,0" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}"/>
+                <Border x:Name="ColorResultBorder" Background="{DynamicResource AccentColor}" CornerRadius="5" Grid.Column="1" VerticalAlignment="Center" Grid.Row="0" Width="47" Height="20" HorizontalAlignment="Right" Margin="0,0,20,0"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
+                    <Border x:Name="AccentColor1Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#FF0044EA" CornerRadius="5" Width="20" Height="20" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right"/>
+                    <Rectangle ToolTip="Select the first color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectAccentColor1_Click">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
+                    <Border x:Name="AccentColor2Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#FF00C7ED" CornerRadius="5" Width="20" Height="20" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right"/>
+                    <Rectangle ToolTip="Select the second color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectAccentColor2_Click" >
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+            </Grid>
         </Border>
-        <Border BorderThickness="0" Background="{DynamicResource SecondaryBackgroundColor}" Opacity="0.7" CornerRadius="10" Margin="21,29,21,282">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="20" Opacity="0.3" RenderingBias="Performance" ShadowDepth="5"/>
-            </Border.Effect>
+        <Border BorderThickness="0" Grid.Row="1" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="10" Margin="10,5,10,5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Primary Background Color" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" FontFamily="Outfit" Margin="20,0,0,0" Foreground="{DynamicResource TextColor}"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
+                    <Border x:Name="BGColor1Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="5" Width="20" Height="20"/>
+                    <Rectangle ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectBGColor1_Click">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+            </Grid>
         </Border>
-        <Border BorderThickness="0" Background="{DynamicResource SecondaryBackgroundColor}" Opacity="0.7" CornerRadius="10" Margin="20,129,22,231">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="20" Opacity="0.3" RenderingBias="Performance" ShadowDepth="5"/>
-            </Border.Effect>
+        <Border BorderThickness="0" Grid.Row="2" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="10" Margin="10,5,10,5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Secondary Background Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
+                    <Border x:Name="BGColor2Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" BorderThickness="1" BorderBrush="{DynamicResource PrimaryBackgroundColor}" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="5" Width="20" Height="20"/>
+                    <Rectangle ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectBGColor2_Click">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+            </Grid>
         </Border>
-        <Border BorderThickness="0" Background="{DynamicResource SecondaryBackgroundColor}" Opacity="0.7" CornerRadius="10" Margin="20,180,22,180">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="20" Opacity="0.3" RenderingBias="Performance" ShadowDepth="5"/>
-            </Border.Effect>
+        <Border BorderThickness="0" Grid.Row="3" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="10" Margin="10,5,10,5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Sidebar Background Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
+                    <Border x:Name="SBColorBorder" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" BorderThickness="1" BorderBrush="{DynamicResource PrimaryBackgroundColor}" Background="{DynamicResource SideBarBackgroundColor}" CornerRadius="5" Width="20" Height="20"/>
+                    <Rectangle ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectSBColor_Click">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+            </Grid>
         </Border>
-        <Border BorderThickness="0" Background="{DynamicResource SecondaryBackgroundColor}" Opacity="0.7" CornerRadius="10" Margin="20,231,22,129">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="20" Opacity="0.3" RenderingBias="Performance" ShadowDepth="5"/>
-            </Border.Effect>
+        <Border BorderThickness="0" Grid.Row="4" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="10" Margin="10,5,10,5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Icon Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
+                    <Border x:Name="IconColorBorder" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="{DynamicResource IconColor}" CornerRadius="5" Width="20" Height="20"/>
+                    <Rectangle ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectIconColor_Click">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+            </Grid>
         </Border>
-        <Border BorderThickness="0" Background="{DynamicResource SecondaryBackgroundColor}" Opacity="0.7" CornerRadius="10" Margin="20,282,22,78">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="20" Opacity="0.3" RenderingBias="Performance" ShadowDepth="5"/>
-            </Border.Effect>
+        <Border BorderThickness="0" Grid.Row="5" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="10" Margin="10,5,10,5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Sidebar Icon Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
+                    <Border x:Name="SBIconColorBorder" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" BorderThickness="1" BorderBrush="{DynamicResource PrimaryBackgroundColor}" Background="{DynamicResource SideBarIconColor}" CornerRadius="5" Width="20" Height="20"/>
+                    <Rectangle ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectSBIconColor_Click">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+            </Grid>
         </Border>
-        <TextBlock Text="Accent Color" FontSize="20" VerticalAlignment="Top" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="30,35,271,0">
-        </TextBlock>
-        <TextBlock Text="Second Color" FontSize="15" FontWeight="Medium" FontFamily="Outfit" VerticalAlignment="Top" Foreground="{DynamicResource TextColor}" Margin="30,91,287,0">
-        </TextBlock>
-        <Border x:Name="AccentColor1Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#FF0044EA" CornerRadius="5" Width="20" Height="20" Margin="345,64,55,316"/>
-        <TextBlock Text="First Color" FontSize="15" VerticalAlignment="Top" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="30,65,318,0">
-        </TextBlock>
-        <Border x:Name="AccentColor2Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#FF00C7ED" CornerRadius="5" Width="20" Height="20" Margin="345,90,55,290"/>
-        <Border x:Name="ColorResultBorder" Background="{DynamicResource AccentColor}" CornerRadius="5" Margin="345,35,28,340"/>
-        <Rectangle Panel.ZIndex="-1" RadiusX="20" RadiusY="20" Fill="{DynamicResource PrimaryBackgroundColor}" Opacity="1" Stroke="AliceBlue" RenderTransformOrigin="0.5,0.5" StrokeThickness="0"/>
-        <TextBlock Text="Primary Background Color" VerticalAlignment="Top" FontSize="15" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="30,139,209,0">
-        </TextBlock>
-        <Border x:Name="BGColor1Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#ccd0d1" CornerRadius="5" Width="20" Height="20" Margin="345,139,55,241"/>
-        <TextBlock Text="Secondary Background Color" FontSize="15" VerticalAlignment="Top" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="30,189,189,0">
-        </TextBlock>
-        <Border x:Name="BGColor2Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#f6f8fa" CornerRadius="5" Width="20" Height="20" Margin="345,190,55,190"/>
-        <TextBlock Text="Text Color" VerticalAlignment="Top" FontSize="15" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="30,241,312,0">
-        </TextBlock>
-        <Border x:Name="TextColorBorder" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#242c35" CornerRadius="5" Width="20" Height="20" Margin="345,241,55,139"/>
-        <TextBlock Text="Icon Color" VerticalAlignment="Top" FontSize="15" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="30,292,312,0">
-        </TextBlock>
-        <Border x:Name="IconColorBorder" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#72767C" CornerRadius="5" Width="20" Height="20" Margin="345,292,55,88"/>
-        <Button x:Name="CancelButton" Content="Cancel" FontFamily="Outfit" FontWeight="Bold" Cursor="Hand" Panel.ZIndex="4" Foreground="AliceBlue" Template="{StaticResource DefaultButtons}" Click="CancelButton_Click" Margin="95,356,265,20"/>
-        <Button x:Name="OKButton" Content="Save" FontFamily="Outfit" FontWeight="Bold" Cursor="Hand" Panel.ZIndex="4" Foreground="AliceBlue" Template="{StaticResource DefaultButtons}" Click="OkButton_Click" IsDefault="True" Margin="30,356,330,20">
-        </Button>
-        <Rectangle x:Name="ChangeAccentColor1" ToolTip="Select the first color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="370,63,28,315" MouseLeftButtonDown="SelectAccentColor1_Click" Panel.ZIndex="3">
-            <Rectangle.OpacityMask>
-                <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
-            </Rectangle.OpacityMask>
-        </Rectangle>
+        <Border BorderThickness="0" Grid.Row="6" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="10" Margin="10,5,10,5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Text Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
+                    <Border x:Name="TextColorBorder" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="{DynamicResource TextColor}" CornerRadius="5" Width="20" Height="20"/>
+                    <Rectangle ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectTextColor_Click">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border BorderThickness="0" Grid.Row="7" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="10" Margin="10,5,10,5">
 
-        <Rectangle x:Name="ChangeAccentColor2" ToolTip="Select the second color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="370,89,28,289" MouseLeftButtonDown="SelectAccentColor2_Click" Panel.ZIndex="3">
-            <Rectangle.OpacityMask>
-                <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
-            </Rectangle.OpacityMask>
-        </Rectangle>
-
-        <Rectangle x:Name="ChangeBGColor1" ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="370,138,28,240" MouseLeftButtonDown="SelectBGColor1_Click" Panel.ZIndex="3">
-            <Rectangle.OpacityMask>
-                <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
-            </Rectangle.OpacityMask>
-        </Rectangle>
-
-        <Rectangle x:Name="ChangeBGColor2" ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="370,189,28,189" MouseLeftButtonDown="SelectBGColor2_Click" Panel.ZIndex="3">
-            <Rectangle.OpacityMask>
-                <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
-            </Rectangle.OpacityMask>
-        </Rectangle>
-
-        <Rectangle x:Name="ChangeTextColor" ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="370,240,28,138" MouseLeftButtonDown="SelectTextColor_Click" Panel.ZIndex="3">
-            <Rectangle.OpacityMask>
-                <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
-            </Rectangle.OpacityMask>
-        </Rectangle>
-
-        <Rectangle x:Name="ChangeIconColor" ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="370,291,28,87" MouseLeftButtonDown="SelectIconColor_Click" Panel.ZIndex="3">
-            <Rectangle.OpacityMask>
-                <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
-            </Rectangle.OpacityMask>
-        </Rectangle>
+            <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">
+                <Button Content="Save" FontFamily="Outfit" Height="20" Width="50" FontWeight="Bold" Cursor="Hand" Foreground="AliceBlue" Template="{StaticResource DefaultButtons}" Click="OkButton_Click" IsDefault="True"/>
+                <Button Content="Cancel" FontFamily="Outfit" Height="20" Width="50" Margin="5,0,0,0" FontWeight="Bold" Cursor="Hand" Foreground="AliceBlue" Template="{StaticResource DefaultButtons}" Click="CancelButton_Click"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

@@ -33,15 +33,15 @@
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10">
             <!-- Current Name -->
             <TextBlock Text="Current name :" FontSize="15" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="0,0,0,10"/>
-            <Label Content="{Binding CurrentName}" Opacity="0.7" Foreground="{DynamicResource TextColor}" FontFamily="Outfit" FontWeight="Medium" Background="{DynamicResource SecondaryBackgroundColor}" FontSize="15" VerticalContentAlignment="Center" Margin="0,0,0,10" Height="30">
-                <Label.Effect>
+            <TextBlock x:Name="CurrentNameTextBlock" Text="" Padding="5,5,5,0" Opacity="0.7" Foreground="{DynamicResource TextColor}" FontFamily="Outfit" FontWeight="Medium" Background="{DynamicResource SecondaryBackgroundColor}" VerticalAlignment="Center" TextAlignment="Left" FontSize="15"  Margin="0,0,0,10" Height="30">
+                <TextBlock.Effect>
                     <DropShadowEffect BlurRadius="20" Opacity="0.3" RenderingBias="Performance" ShadowDepth="5"/>
-                </Label.Effect>
-            </Label>
+                </TextBlock.Effect>
+            </TextBlock>
 
             <!-- New Name -->
             <TextBlock Text="New name :" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" FontSize="15" Margin="0,0,0,10"/>
-            <TextBox x:Name="NewNameTextBox" Opacity="0.7" Background="{DynamicResource SecondaryBackgroundColor}" Foreground="{DynamicResource TextColor}" BorderThickness="0" FontWeight="Medium" FontFamily="Outfit" BorderBrush="#202020" VerticalContentAlignment="Center" Cursor="IBeam" FontSize="15" Margin="0,0,0,10" Height="30">
+            <TextBox x:Name="NewNameTextBox" Text="" Padding="3,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Opacity="0.7" Background="{DynamicResource SecondaryBackgroundColor}" Foreground="{DynamicResource TextColor}" BorderThickness="0" FontWeight="Medium" FontFamily="Outfit" BorderBrush="#202020" Cursor="IBeam" FontSize="15" Margin="0,0,0,10" Height="30">
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Setter Property="Foreground" Value="AliceBlue"/>

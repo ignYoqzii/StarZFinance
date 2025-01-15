@@ -9,6 +9,60 @@
       Title="Settings">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border CornerRadius="30" Grid.Row="0" Grid.Column="0" Background="{DynamicResource SecondaryBackgroundColor}" Margin="0,0,5,5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Personalize" FontSize="30" FontFamily="Outfit" FontWeight="Medium" Margin="20,0,0,0" Foreground="{DynamicResource TextColor}" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0">
+                    <CheckBox x:Name="CheckBoxLightTheme" Style="{StaticResource ThemeCheckBoxStyle}" Background="#f3f4f9" BorderBrush="{DynamicResource AccentColor}" VerticalAlignment="Center" Tag="LightTheme" Margin="20,0,0,0" Checked="CheckBoxTheme_Checked" />
+                    <CheckBox x:Name="CheckBoxDarkTheme" Style="{StaticResource ThemeCheckBoxStyle}" Background="#1c1c1c" BorderBrush="{DynamicResource AccentColor}" VerticalAlignment="Center" Tag="DarkTheme" Margin="20,0,0,0" Checked="CheckBoxTheme_Checked" />
+                    <CheckBox x:Name="CheckBoxCustomTheme" Style="{StaticResource ThemeCheckBoxStyle}" Background="{DynamicResource AccentColor}" BorderBrush="{DynamicResource IconColor}" VerticalAlignment="Center" Tag="CustomTheme" Margin="20,0,0,0" Checked="CheckBoxTheme_Checked"/>
+                    <Line X1="0" Y1="0" X2="0" Y2="50" Stroke="{DynamicResource IconColor}" StrokeThickness="2" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="2">
+                    <Rectangle ToolTip="Import a valid StarZ Theme .szt file and apply it." Style="{DynamicResource IconsStyle}" VerticalAlignment="Center" Height="50" Width="50" Margin="0,0,20,0" MouseLeftButtonDown="ImportThemes_MouseLeftButtonDown">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="/Resources/Import.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+
+
+                    <Rectangle ToolTip="Export the current themes as a backup." Style="{DynamicResource IconsStyle}" VerticalAlignment="Center" Height="50" Width="50" Margin="0,0,20,0" MouseLeftButtonDown="ExportThemes_MouseLeftButtonDown">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="/Resources/Export.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0">
+                    <TextBlock Text="Colors Manager" FontSize="15" FontFamily="Outfit" FontWeight="Medium" Margin="20,0,0,0" Foreground="{DynamicResource TextColor}" TextAlignment="Center"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Rectangle ToolTip="Restore the currently applied themes to default." Style="{DynamicResource IconsStyle}" Width="15" Height="15" Margin="10,0,0,0" VerticalAlignment="Center" MouseLeftButtonDown="ResetAllThemes_MouseLeftButtonDown">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="/Resources/Reset.png" RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </StackPanel>
+
+                <Button Content="Open" FontWeight="Bold" FontSize="10px" HorizontalAlignment="Right" Cursor="Hand" Foreground="AliceBlue" FontFamily="Outfit" Template="{StaticResource DefaultButtons}" Grid.Row="2" Grid.Column="2" Margin="0,0,20,0" VerticalAlignment="Center" Click="OpenThemesManager_Click" Width="50" Height="25"/>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

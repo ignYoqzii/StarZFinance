@@ -42,7 +42,7 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Grid>
-        <Border x:Name="SideBarBackground" Background="{DynamicResource SecondaryBackgroundColor}" Grid.Column="0" Grid.RowSpan="2" CornerRadius="30" Margin="15" BorderThickness="0">
+        <Border x:Name="SideBarBackground" Background="{DynamicResource SideBarBackgroundColor}" Grid.Column="0" Grid.RowSpan="2" CornerRadius="30" Margin="15" BorderThickness="0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -54,7 +54,7 @@
                         <ImageBrush ImageSource="/Resources/StarZLogoBluePart.png" RenderOptions.BitmapScalingMode="HighQuality" />
                     </Rectangle.OpacityMask>
                 </Rectangle>
-                <Rectangle x:Name="StarZLogoPart2" Fill="{DynamicResource IconColor}" RenderOptions.BitmapScalingMode="HighQuality" Height="30" Width="30" Grid.Row="0" Margin="0,20,0,0">
+                <Rectangle x:Name="StarZLogoPart2" Fill="{DynamicResource SideBarIconColor}" RenderOptions.BitmapScalingMode="HighQuality" Height="30" Width="30" Grid.Row="0" Margin="0,20,0,0">
                     <Rectangle.OpacityMask>
                         <ImageBrush ImageSource="/Resources/StarZLogoWhitePart.png" RenderOptions.BitmapScalingMode="HighQuality" />
                     </Rectangle.OpacityMask>

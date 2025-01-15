@@ -36,8 +36,10 @@ namespace StarZFinance.Windows
             AccentColor2Border.Background = GetSolidColorBrush("AccentColor2");
             BGColor1Border.Background = GetSolidColorBrush("PrimaryBackgroundColor");
             BGColor2Border.Background = GetSolidColorBrush("SecondaryBackgroundColor");
-            TextColorBorder.Background = GetSolidColorBrush("TextColor");
+            SBColorBorder.Background = GetSolidColorBrush("SideBarBackgroundColor");
             IconColorBorder.Background = GetSolidColorBrush("IconColor");
+            SBIconColorBorder.Background = GetSolidColorBrush("SideBarIconColor");
+            TextColorBorder.Background = GetSolidColorBrush("TextColor");
         }
 
         private SolidColorBrush GetSolidColorBrush(string colorKey)
@@ -61,8 +63,10 @@ namespace StarZFinance.Windows
         private void SelectAccentColor2_Click(object sender, RoutedEventArgs e) => SelectColor("AccentColor2", AccentColor2Border);
         private void SelectBGColor1_Click(object sender, RoutedEventArgs e) => SelectColor("PrimaryBackgroundColor", BGColor1Border);
         private void SelectBGColor2_Click(object sender, RoutedEventArgs e) => SelectColor("SecondaryBackgroundColor", BGColor2Border);
-        private void SelectTextColor_Click(object sender, RoutedEventArgs e) => SelectColor("TextColor", TextColorBorder);
+        private void SelectSBColor_Click(object sender, RoutedEventArgs e) => SelectColor("SideBarBackgroundColor", SBColorBorder);
         private void SelectIconColor_Click(object sender, RoutedEventArgs e) => SelectColor("IconColor", IconColorBorder);
+        private void SelectSBIconColor_Click(object sender, RoutedEventArgs e) => SelectColor("SideBarIconColor", SBIconColorBorder);
+        private void SelectTextColor_Click(object sender, RoutedEventArgs e) => SelectColor("TextColor", TextColorBorder);
 
         private void SelectColor(string colorKey, Border colorBorder)
         {
@@ -99,13 +103,11 @@ namespace StarZFinance.Windows
             {
                 DialogResult = false; // No changes, set result to false
             }
-            Close();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
-            Close();
         }
 
         private void UpdateGradientBrush()

@@ -1,27 +1,34 @@
-﻿using System.Windows;
-using static StarZFinance.Windows.MainWindow;
+﻿using StarZFinance.Classes;
+using System.Windows;
 
 namespace StarZFinance.Windows
 {
     public partial class EditWindow
     {
-        public string? CurrentName { get; private set; }
         public string? NewName { get; private set; }
-        public string? CurrentURL { get; private set; }
-        public string? NewURL { get; private set; }
 
-        public EditWindow(string currentName, string? currentUrl = null)
+        public EditWindow()
         {
             InitializeComponent();
-            CurrentName = currentName;
-            DataContext = this;
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            // Hide the BackgroundForWindowsOnTop element when closing
+            OverlayService.HideOverlay();
+            base.OnClosing(e);
+        }
 
-            base.OnClosing(e); // Call the base method
+        public static string? ShowDialog(string currentName)
+        {
+            OverlayService.ShowOverlay();
+            EditWindow editWindow = new();
+            editWindow.CurrentNameTextBlock.Text = currentName;
+
+            if (editWindow.ShowDialog() == true)
+            {
+                return editWindow.NewName;
+            }
+            return null;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -36,4 +43,3 @@ namespace StarZFinance.Windows
         }
     }
 }
-
