@@ -34,13 +34,7 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
             <Border Background="{DynamicResource IconColor}" Grid.Row="1" CornerRadius="2" BorderThickness="1" Height="10" Width="300">
-                <ProgressBar Minimum="0" Maximum="1" Value="0" Background="Transparent" BorderThickness="0">
-                    <ProgressBar.Foreground>
-                        <LinearGradientBrush EndPoint="0.5,25" StartPoint="0,0">
-                            <GradientStop Color="#FF00C7ED" Offset="0"/>
-                            <GradientStop Color="#FF0044EA" Offset="1"/>
-                        </LinearGradientBrush>
-                    </ProgressBar.Foreground>
+                <ProgressBar Minimum="0" Maximum="1" Value="0" Background="Transparent" Foreground="{DynamicResource AccentColor}" BorderThickness="0">
                     <ProgressBar.Triggers>
                         <EventTrigger RoutedEvent="Loaded">
                             <BeginStoryboard>
