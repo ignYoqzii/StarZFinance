@@ -1,0 +1,111 @@
+﻿<Window x:Class="StarZFinance.Windows.StarZColorDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StarZFinance"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        ShowInTaskbar="True"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        Title="Colors Manager"
+        Height="400"
+        Width="420"
+        AllowsTransparency="True"
+        Background="Transparent">
+
+    <Grid>
+        <Border BorderThickness="0" Panel.ZIndex="1" Background="{DynamicResource SecondaryBackgroundColor}" Opacity="0.7" CornerRadius="10" Margin="21,349,21,14">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Opacity="0.3" RenderingBias="Performance" ShadowDepth="5"/>
+            </Border.Effect>
+        </Border>
+        <Border BorderThickness="0" Background="{DynamicResource SecondaryBackgroundColor}" Opacity="0.7" CornerRadius="10" Margin="21,29,21,282">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Opacity="0.3" RenderingBias="Performance" ShadowDepth="5"/>
+            </Border.Effect>
+        </Border>
+        <Border BorderThickness="0" Background="{DynamicResource SecondaryBackgroundColor}" Opacity="0.7" CornerRadius="10" Margin="20,129,22,231">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Opacity="0.3" RenderingBias="Performance" ShadowDepth="5"/>
+            </Border.Effect>
+        </Border>
+        <Border BorderThickness="0" Background="{DynamicResource SecondaryBackgroundColor}" Opacity="0.7" CornerRadius="10" Margin="20,180,22,180">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Opacity="0.3" RenderingBias="Performance" ShadowDepth="5"/>
+            </Border.Effect>
+        </Border>
+        <Border BorderThickness="0" Background="{DynamicResource SecondaryBackgroundColor}" Opacity="0.7" CornerRadius="10" Margin="20,231,22,129">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Opacity="0.3" RenderingBias="Performance" ShadowDepth="5"/>
+            </Border.Effect>
+        </Border>
+        <Border BorderThickness="0" Background="{DynamicResource SecondaryBackgroundColor}" Opacity="0.7" CornerRadius="10" Margin="20,282,22,78">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Opacity="0.3" RenderingBias="Performance" ShadowDepth="5"/>
+            </Border.Effect>
+        </Border>
+        <TextBlock Text="Accent Color" FontSize="20" VerticalAlignment="Top" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="30,35,271,0">
+        </TextBlock>
+        <TextBlock Text="Second Color" FontSize="15" FontWeight="Medium" FontFamily="Outfit" VerticalAlignment="Top" Foreground="{DynamicResource TextColor}" Margin="30,91,287,0">
+        </TextBlock>
+        <Border x:Name="AccentColor1Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#FF0044EA" CornerRadius="5" Width="20" Height="20" Margin="345,64,55,316"/>
+        <TextBlock Text="First Color" FontSize="15" VerticalAlignment="Top" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="30,65,318,0">
+        </TextBlock>
+        <Border x:Name="AccentColor2Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#FF00C7ED" CornerRadius="5" Width="20" Height="20" Margin="345,90,55,290"/>
+        <Border x:Name="ColorResultBorder" Background="{DynamicResource AccentColor}" CornerRadius="5" Margin="345,35,28,340"/>
+        <Rectangle Panel.ZIndex="-1" RadiusX="20" RadiusY="20" Fill="{DynamicResource PrimaryBackgroundColor}" Opacity="1" Stroke="AliceBlue" RenderTransformOrigin="0.5,0.5" StrokeThickness="0"/>
+        <TextBlock Text="Primary Background Color" VerticalAlignment="Top" FontSize="15" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="30,139,209,0">
+        </TextBlock>
+        <Border x:Name="BGColor1Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#ccd0d1" CornerRadius="5" Width="20" Height="20" Margin="345,139,55,241"/>
+        <TextBlock Text="Secondary Background Color" FontSize="15" VerticalAlignment="Top" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="30,189,189,0">
+        </TextBlock>
+        <Border x:Name="BGColor2Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#f6f8fa" CornerRadius="5" Width="20" Height="20" Margin="345,190,55,190"/>
+        <TextBlock Text="Text Color" VerticalAlignment="Top" FontSize="15" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="30,241,312,0">
+        </TextBlock>
+        <Border x:Name="TextColorBorder" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#242c35" CornerRadius="5" Width="20" Height="20" Margin="345,241,55,139"/>
+        <TextBlock Text="Icon Color" VerticalAlignment="Top" FontSize="15" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="30,292,312,0">
+        </TextBlock>
+        <Border x:Name="IconColorBorder" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#72767C" CornerRadius="5" Width="20" Height="20" Margin="345,292,55,88"/>
+        <Button x:Name="CancelButton" Content="Cancel" FontFamily="Outfit" FontWeight="Bold" Cursor="Hand" Panel.ZIndex="4" Foreground="AliceBlue" Template="{StaticResource DefaultButtons}" Click="CancelButton_Click" Margin="95,356,265,20"/>
+        <Button x:Name="OKButton" Content="Save" FontFamily="Outfit" FontWeight="Bold" Cursor="Hand" Panel.ZIndex="4" Foreground="AliceBlue" Template="{StaticResource DefaultButtons}" Click="OkButton_Click" IsDefault="True" Margin="30,356,330,20">
+        </Button>
+        <Rectangle x:Name="ChangeAccentColor1" ToolTip="Select the first color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="370,63,28,315" MouseLeftButtonDown="SelectAccentColor1_Click" Panel.ZIndex="3">
+            <Rectangle.OpacityMask>
+                <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+            </Rectangle.OpacityMask>
+        </Rectangle>
+
+        <Rectangle x:Name="ChangeAccentColor2" ToolTip="Select the second color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="370,89,28,289" MouseLeftButtonDown="SelectAccentColor2_Click" Panel.ZIndex="3">
+            <Rectangle.OpacityMask>
+                <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+            </Rectangle.OpacityMask>
+        </Rectangle>
+
+        <Rectangle x:Name="ChangeBGColor1" ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="370,138,28,240" MouseLeftButtonDown="SelectBGColor1_Click" Panel.ZIndex="3">
+            <Rectangle.OpacityMask>
+                <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+            </Rectangle.OpacityMask>
+        </Rectangle>
+
+        <Rectangle x:Name="ChangeBGColor2" ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="370,189,28,189" MouseLeftButtonDown="SelectBGColor2_Click" Panel.ZIndex="3">
+            <Rectangle.OpacityMask>
+                <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+            </Rectangle.OpacityMask>
+        </Rectangle>
+
+        <Rectangle x:Name="ChangeTextColor" ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="370,240,28,138" MouseLeftButtonDown="SelectTextColor_Click" Panel.ZIndex="3">
+            <Rectangle.OpacityMask>
+                <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+            </Rectangle.OpacityMask>
+        </Rectangle>
+
+        <Rectangle x:Name="ChangeIconColor" ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="370,291,28,87" MouseLeftButtonDown="SelectIconColor_Click" Panel.ZIndex="3">
+            <Rectangle.OpacityMask>
+                <ImageBrush ImageSource="/Resources/ColorPicker.png" RenderOptions.BitmapScalingMode="HighQuality" />
+            </Rectangle.OpacityMask>
+        </Rectangle>
+    </Grid>
+</Window>

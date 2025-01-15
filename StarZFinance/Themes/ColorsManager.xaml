@@ -1,5 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Mostly for design view, but colors could be anything else -->
+    <!-- These are Dark Theme colors -->
 
     <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#1c1c1c" />
     <SolidColorBrush x:Key="SecondaryBackgroundColor" Color="#0d0d0d" />

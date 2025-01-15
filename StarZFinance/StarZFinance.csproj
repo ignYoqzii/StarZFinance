@@ -6,8 +6,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+	<UseWindowsForms>true</UseWindowsForms>
     <StartupObject>StarZFinance.App</StartupObject>
-    <ApplicationIcon>Resources\starz.ico</ApplicationIcon>
+    <ApplicationIcon>Resources/starz.ico</ApplicationIcon>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -21,6 +22,10 @@
 		<None Remove="Resources/Dashbaord.png" />
 		<None Remove="Resources/News.png" />
 		<None Remove="Resources/Settings.png" />
+		<None Remove="Resources/ColorPicker.png" />
+		<None Remove="Resources/Export.png" />
+		<None Remove="Resources/Import.png" />
+		<None Remove="Resources/Info.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -38,10 +43,18 @@
 		<Resource Include="Resources/Dashboard.png" />
 		<Resource Include="Resources/News.png" />
 		<Resource Include="Resources/Settings.png" />
+		<Resource Include="Resources/ColorPicker.png" />
+		<Resource Include="Resources/Export.png" />
+		<Resource Include="Resources/Import.png" />
+		<Resource Include="Resources/Info.png" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Scripts\" />
+	  <Folder Include="Scripts/" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
 	</ItemGroup>
 
 </Project>

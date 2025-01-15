@@ -3,13 +3,16 @@ using System.Windows.Media.Animation;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace StarZFinance
+namespace StarZFinance.Windows
 {
     public partial class MainWindow : Window
     {
+        public static MainWindow? Instance { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            Instance = this;
             SideBar.SelectedIndex = 0; // Home tab is shown at first
         }
 
@@ -43,7 +46,7 @@ namespace StarZFinance
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void MaximizeButton_Click(object sender, RoutedEventArgs e)
@@ -75,6 +78,22 @@ namespace StarZFinance
             NavigationFrame.Navigate(Selected!.NavigationLink);
 
             PageTextBlock.Text = Selected.Tag.ToString();
+        }
+
+        public void ShowOverlay()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                WindowPopUpOverlay.Visibility = Visibility.Visible;
+            });
+        }
+
+        public void HideOverlay()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                WindowPopUpOverlay.Visibility = Visibility.Collapsed;
+            });
         }
     }
 }
