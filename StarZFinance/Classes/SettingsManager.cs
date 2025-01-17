@@ -38,7 +38,7 @@ namespace StarZFinance.Classes
                     Type = "Button",
                     DefaultValue = "Open", // Button's text
                     Action = (value) => OpenAppFolder()
-                },
+                }
             ];
         }
 

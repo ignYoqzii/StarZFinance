@@ -29,6 +29,7 @@
 		<None Remove="Resources\CustomTheme.png" />
 		<None Remove="Resources\Outfit.ttf" />
 		<None Remove="Resources\Reset.png" />
+		<None Remove="Resources\Search.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -55,6 +56,7 @@
 		<Resource Include="Resources/Info.png" />
 		<Resource Include="Resources\CustomTheme.png" />
 		<Resource Include="Resources\Reset.png" />
+		<Resource Include="Resources\Search.png" />
 	</ItemGroup>
 
 	<ItemGroup>
