@@ -1,6 +1,8 @@
 ﻿using StarZFinance.Classes;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace StarZFinance
 {
@@ -86,6 +88,30 @@ namespace StarZFinance
                 LogsManager.Log($"Error during application's exit: {ex.Message}", logFileName);
             }
         }
-    }
 
+        public static void CheckBoxAnimation(object sender)
+        {
+            if (sender is System.Windows.Controls.CheckBox checkBox)
+            {
+                // Access the ControlTemplate elements
+                if (checkBox.Template.FindName("button", checkBox) is Border button)
+                {
+                    Storyboard Storyboard1 = (Storyboard)checkBox.FindResource("right");
+                    Storyboard Storyboard2 = (Storyboard)checkBox.FindResource("left");
+                    if (checkBox.IsChecked == true)
+                    {
+                        // Start the "right" animation when checked
+                        Storyboard2.Stop(button);
+                        Storyboard1.Begin(button);
+                    }
+                    else
+                    {
+                        // Start the "left" animation when unchecked
+                        Storyboard1.Stop(button);
+                        Storyboard2.Begin(button);
+                    }
+                }
+            }
+        }
+    }
 }

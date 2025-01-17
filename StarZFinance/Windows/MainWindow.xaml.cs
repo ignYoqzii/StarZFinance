@@ -49,16 +49,51 @@ namespace StarZFinance.Windows
             System.Windows.Application.Current.Shutdown();
         }
 
+        private double restoreWidth;
+        private double restoreHeight;
+        private double restoreTop;
+        private double restoreLeft;
+        private bool isMaximized = false;
+
         private void MaximizeButton_Click(object sender, RoutedEventArgs e)
         {
-            if (WindowState == WindowState.Normal)
+            if (!isMaximized)
             {
-                WindowState = WindowState.Maximized;
+                MaximizeWindow();
             }
             else
             {
-                WindowState = WindowState.Normal;
+                RestoreWindow();
             }
+        }
+
+        private void MaximizeWindow()
+        {
+            // Store the current size and position
+            restoreWidth = this.Width;
+            restoreHeight = this.Height;
+            restoreTop = this.Top;
+            restoreLeft = this.Left;
+
+            // Maximize to the working area
+            var workArea = SystemParameters.WorkArea;
+            this.Top = workArea.Top;
+            this.Left = workArea.Left;
+            this.Width = workArea.Width;
+            this.Height = workArea.Height;
+
+            isMaximized = true;
+        }
+
+        private void RestoreWindow()
+        {
+            // Restore to original size and position
+            this.Width = restoreWidth;
+            this.Height = restoreHeight;
+            this.Top = restoreTop;
+            this.Left = restoreLeft;
+
+            isMaximized = false;
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)

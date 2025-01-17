@@ -80,40 +80,65 @@
                 </Setter>
             </Style>
 
-            <ControlTemplate x:Key="DefaultButtons" TargetType="Button">
-                <Border Name="RootElement" RenderTransformOrigin="0.5,0.5">
-                    <Border BorderBrush="AliceBlue" BorderThickness="0,0,0,0" CornerRadius="10" Background="{DynamicResource AccentColor}">
-                        <ContentPresenter Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroup x:Name="CommonStates">
-                            <VisualState x:Name="Normal">
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetName="RootElement" Storyboard.TargetProperty="RenderTransform.ScaleX" To="1" Duration="0:0:0.3"/>
-                                    <DoubleAnimation Storyboard.TargetName="RootElement" Storyboard.TargetProperty="RenderTransform.ScaleY" To="1" Duration="0:0:0.3"/>
-                                </Storyboard>
-                            </VisualState>
-                            <VisualState x:Name="MouseOver">
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetName="RootElement" Storyboard.TargetProperty="RenderTransform.ScaleX" To="1.02" Duration="0:0:0.3"/>
-                                    <DoubleAnimation Storyboard.TargetName="RootElement" Storyboard.TargetProperty="RenderTransform.ScaleY" To="1.05" Duration="0:0:0.3"/>
-                                    <DoubleAnimation Storyboard.TargetName="RootElement" Storyboard.TargetProperty="Opacity" To="0.7" Duration="0:0:0.3"/>
-                                </Storyboard>
-                            </VisualState>
-                            <VisualState x:Name="Pressed">
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetName="RootElement" Storyboard.TargetProperty="RenderTransform.ScaleX" To="0.98" Duration="0:0:0.05"/>
-                                    <DoubleAnimation Storyboard.TargetName="RootElement" Storyboard.TargetProperty="RenderTransform.ScaleY" To="0.98" Duration="0:0:0.05"/>
-                                    <DoubleAnimation Storyboard.TargetName="RootElement" Storyboard.TargetProperty="Opacity" To="0.5" Duration="0:0:0.05"/>
-                                </Storyboard>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateManager.VisualStateGroups>
-                    <Border.RenderTransform>
-                        <ScaleTransform x:Name="RenderTransform"/>
-                    </Border.RenderTransform>
-                </Border>
-            </ControlTemplate>
+            <Style x:Key="DefaultButtons" TargetType="Button">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Name="RootElement" RenderTransformOrigin="0.5,0.5" Cursor="Hand" CornerRadius="10" Background="{TemplateBinding Background}">
+                                <ContentPresenter Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="RootElement" 
+                                                     Storyboard.TargetProperty="RenderTransform.ScaleX" 
+                                                     To="1" Duration="0:0:0.3"/>
+                                                <DoubleAnimation Storyboard.TargetName="RootElement" 
+                                                     Storyboard.TargetProperty="RenderTransform.ScaleY" 
+                                                     To="1" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="MouseOver">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="RootElement" 
+                                                     Storyboard.TargetProperty="RenderTransform.ScaleX" 
+                                                     To="1.02" Duration="0:0:0.3"/>
+                                                <DoubleAnimation Storyboard.TargetName="RootElement" 
+                                                     Storyboard.TargetProperty="RenderTransform.ScaleY" 
+                                                     To="1.05" Duration="0:0:0.3"/>
+                                                <DoubleAnimation Storyboard.TargetName="RootElement" 
+                                                     Storyboard.TargetProperty="Opacity" 
+                                                     To="0.7" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="RootElement" 
+                                                     Storyboard.TargetProperty="RenderTransform.ScaleX" 
+                                                     To="0.98" Duration="0:0:0.05"/>
+                                                <DoubleAnimation Storyboard.TargetName="RootElement" 
+                                                     Storyboard.TargetProperty="RenderTransform.ScaleY" 
+                                                     To="0.98" Duration="0:0:0.05"/>
+                                                <DoubleAnimation Storyboard.TargetName="RootElement" 
+                                                     Storyboard.TargetProperty="Opacity" 
+                                                     To="0.5" Duration="0:0:0.05"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border.RenderTransform>
+                                    <ScaleTransform x:Name="RenderTransform"/>
+                                </Border.RenderTransform>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Foreground" Value="AliceBlue"/>
+                <Setter Property="FontFamily" Value="Outfit"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Background" Value="{DynamicResource AccentColor}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
 
             <Style x:Key="ThemeCheckBoxStyle" TargetType="CheckBox">
                 <Setter Property="Cursor" Value="Hand" />
@@ -129,6 +154,147 @@
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsChecked" Value="True">
                                     <Setter TargetName="CheckBoxBorder" Property="BorderThickness" Value="2"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="DefaultCheckBoxes" TargetType="CheckBox">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="CheckBox">
+                            <StackPanel Orientation="Horizontal">
+                                <Grid >
+                                    <Border x:Name="border" Width="40" Height="20" Cursor="Hand" CornerRadius="10" Margin="5,0"/>
+                                    <Border x:Name="button" Background="#FFF" Margin="9,0,0,0" Height="16" Width="16" CornerRadius="13.5" Cursor="Hand" HorizontalAlignment="Left"  />
+                                </Grid>
+                            </StackPanel>
+                            <ControlTemplate.Resources>
+                                <Storyboard x:Key="right">
+                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="button" Duration="0:0:0.3" From="9,0,0,0" To="25,0,0,0" >
+                                        <ThicknessAnimation.EasingFunction>
+                                            <CircleEase EasingMode="EaseOut"/>
+                                        </ThicknessAnimation.EasingFunction>
+                                    </ThicknessAnimation>
+                                </Storyboard>
+                                <Storyboard x:Key="left">
+                                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="button" Duration="0:0:0.3" From="25,0,0,0" To="9,0,0,0" >
+                                        <ThicknessAnimation.EasingFunction>
+                                            <CircleEase EasingMode="EaseOut"/>
+                                        </ThicknessAnimation.EasingFunction>
+                                    </ThicknessAnimation>
+                                </Storyboard>
+                            </ControlTemplate.Resources>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="false">
+                                    <Setter TargetName="border" Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
+                                    <Setter TargetName="button" Property="Margin" Value="9,0,0,0"/>
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter TargetName="border" Property="Background" Value="{DynamicResource AccentColor}"/>
+                                    <Setter TargetName="button" Property="Margin" Value="25,0,0,0"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="TextBox" x:Key="DefaultTextBoxes">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <Border Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="7.5" x:Name="Border">
+                                <ScrollViewer x:Name="PART_ContentHost" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,5,0" Background="Transparent"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+                <Setter Property="FontFamily" Value="Outfit" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontWeight" Value="Medium" />
+                <Setter Property="VerticalAlignment" Value="Bottom" />
+                <Setter Property="CaretBrush" Value="{DynamicResource TextColor}" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Style>
+
+            <!-- ScrollBar Style for all ScrollViewers of the application -->
+            <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Grid x:Name="Grid">
+                                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" 
+                                           Height="Auto" Fill="Transparent"/>
+                                <Border x:Name="Rectangle1" CornerRadius="5" HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Stretch" Width="10" Height="Auto" 
+                                        Background="{TemplateBinding Background}"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="Tag" Value="Horizontal">
+                                    <Setter TargetName="Rectangle1" Property="Width" Value="Auto"/>
+                                    <Setter TargetName="Rectangle1" Property="Height" Value="7"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                <Setter Property="Foreground" Value="{DynamicResource AccentColor}"/>
+                <Setter Property="Background" Value="{DynamicResource IconColor}"/>
+                <Setter Property="Width" Value="10"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+                            <Grid x:Name="GridRoot" Width="12" Background="{x:Null}">
+                                <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="False">
+                                    <Track.Thumb>
+                                        <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" 
+                                               Style="{DynamicResource ScrollThumbs}"/>
+                                    </Track.Thumb>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="False"/>
+                                    </Track.IncreaseRepeatButton>
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="False"/>
+                                    </Track.DecreaseRepeatButton>
+                                </Track>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
+                                    <Setter Value="0.8" TargetName="Thumb" Property="Opacity"/>
+                                </Trigger>
+                                <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
+                                    <Setter Value="0.5" TargetName="Thumb" Property="Opacity"/>
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed"/>
+                                </Trigger>
+                                <Trigger Property="Orientation" Value="Horizontal">
+                                    <Setter TargetName="GridRoot" Property="LayoutTransform">
+                                        <Setter.Value>
+                                            <RotateTransform Angle="-90"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter TargetName="PART_Track" Property="LayoutTransform">
+                                        <Setter.Value>
+                                            <RotateTransform Angle="-90"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Width" Value="Auto"/>
+                                    <Setter Property="Height" Value="12"/>
+                                    <Setter TargetName="Thumb" Property="Tag" Value="Horizontal"/>
+                                    <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand"/>
+                                    <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

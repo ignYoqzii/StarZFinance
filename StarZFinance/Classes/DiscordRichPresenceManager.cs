@@ -4,7 +4,7 @@ namespace StarZFinance.Classes
 {
     public static class DiscordRichPresenceManager
     {
-        private static readonly string ClientId = "1071616808752259164";
+        private static readonly string ClientId = "1329895465977774182";
         private static DiscordRpcClient? discordClient;
 
         public static DiscordRpcClient DiscordClient
@@ -29,9 +29,8 @@ namespace StarZFinance.Classes
                     Assets = new Assets
                     {
                         LargeImageKey = "starz",
-                        LargeImageText = "StarZ Launcher",
-                        SmallImageKey = "minecraft",
-                        SmallImageText = "Minecraft For Windows"
+                        LargeImageText = "StarZ Finance",
+                        SmallImageKey = "finance"
                     }
                 });
             }

@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:StarZFinance"
         mc:Ignorable="d"
         Title="StarZ Finance" MinHeight="560" MinWidth="900" SnapsToDevicePixels="True" WindowState="Normal" Height="560" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" Background="Transparent" WindowStyle="None" AllowsTransparency="True" Loaded="Window_Loaded" d:DesignHeight="560" d:DesignWidth="900">
+    <WindowChrome.WindowChrome>
+        <WindowChrome ResizeBorderThickness="5" CaptionHeight="0" GlassFrameThickness="-1" UseAeroCaptionButtons="False"/>
+    </WindowChrome.WindowChrome>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
@@ -82,7 +85,7 @@
             </Grid>
         </Border>
         <!-- Tab Pages Frame -->
-        <Frame x:Name="NavigationFrame" Grid.Column="1" Grid.Row="1"  NavigationUIVisibility="Hidden" Background="Transparent"/>
+        <Frame x:Name="NavigationFrame" Grid.Column="1" Grid.Row="1" Margin="0,0,20,15" NavigationUIVisibility="Hidden" Background="Transparent"/>
         <!-- To darken the window when displaying a MessageBox or a dialog -->
         <Border x:Name="WindowPopUpOverlay" Panel.ZIndex="2" Visibility="Collapsed" Grid.RowSpan="2" Opacity="0.7" Grid.ColumnSpan="2" CornerRadius="30" Background="Black"/>
     </Grid>

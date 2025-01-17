@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:StarZFinance.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="485" d:DesignWidth="810"
+      d:DesignHeight="470" d:DesignWidth="790"
       Title="Home">
 
     <Grid>

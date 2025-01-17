@@ -84,7 +84,7 @@ namespace StarZFinance.Classes
         private static void HandleThemeApplicationError(Exception ex)
         {
             LogsManager.Log($"Error applying theme: {ex.Message}", logFileName);
-            bool? result = StarZMessageBox.ShowDialog("It seems that one or more themes contain invalid values, which has caused an error. Would you like to reset the themes? Click 'OK' to reset, or 'Cancel' to continue using the corrupted theme file.", "Warning!", true);
+            bool? result = StarZMessageBox.ShowDialog("It seems that one or more themes contain invalid values, which has caused an error. Would you like to reset the themes? Click 'OK' to reset, or 'Cancel' to continue using the corrupted theme file.", "Warning !", true);
             if (result == true)
             {
                 ResetThemesToDefault();
@@ -227,7 +227,7 @@ namespace StarZFinance.Classes
 
                     if (showSuccessMessage)
                     {
-                        StarZMessageBox.ShowDialog($"Current theme exported successfully as backup to {backupFilePath}.", "Success!", false);
+                        StarZMessageBox.ShowDialog($"Current theme exported successfully as backup to {backupFilePath}.", "Success !", false);
                     }
                     LogsManager.Log($"Current theme exported successfully as backup to {backupFilePath}.", logFileName);
                 }
@@ -241,7 +241,7 @@ namespace StarZFinance.Classes
         private static void HandleExportError(Exception ex)
         {
             LogsManager.Log($"Error exporting current theme: {ex.Message}", logFileName);
-            StarZMessageBox.ShowDialog($"Error exporting current theme: {ex.Message}", "Error!", false);
+            StarZMessageBox.ShowDialog($"Error exporting current theme: {ex.Message}", "Error !", false);
         }
 
         public static void ImportTheme()
@@ -282,7 +282,7 @@ namespace StarZFinance.Classes
 
         private static void HandleImportError(Exception ex)
         {
-            StarZMessageBox.ShowDialog($"Error importing theme: {ex.Message}", "Error!", false);
+            StarZMessageBox.ShowDialog($"Error importing theme: {ex.Message}", "Error !", false);
             LogsManager.Log($"Error importing theme: {ex.Message}", logFileName);
         }
     }
