@@ -81,6 +81,11 @@
             </Style>
 
             <Style x:Key="DefaultButtons" TargetType="Button">
+                <Setter Property="Foreground" Value="AliceBlue"/>
+                <Setter Property="FontFamily" Value="Outfit"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Background" Value="{DynamicResource AccentColor}"/>
+                <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -133,11 +138,6 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Foreground" Value="AliceBlue"/>
-                <Setter Property="FontFamily" Value="Outfit"/>
-                <Setter Property="FontWeight" Value="Bold"/>
-                <Setter Property="Background" Value="{DynamicResource AccentColor}"/>
-                <Setter Property="BorderThickness" Value="0"/>
             </Style>
 
             <Style x:Key="ThemeCheckBoxStyle" TargetType="CheckBox">

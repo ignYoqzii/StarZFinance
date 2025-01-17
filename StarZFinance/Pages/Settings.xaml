@@ -55,7 +55,7 @@
                     </Rectangle>
                 </StackPanel>
 
-                <Button Content="Open" FontSize="10" HorizontalAlignment="Right" Style="{StaticResource DefaultButtons}" Grid.Row="2" Grid.Column="2" Margin="0,0,20,0" VerticalAlignment="Center" Click="OpenThemesManager_Click" Width="50" Height="25"/>
+                <Button Content="Open" FontSize="10" HorizontalAlignment="Right" Style="{DynamicResource DefaultButtons}" Grid.Row="2" Grid.Column="2" Margin="0,0,20,0" VerticalAlignment="Center" Click="OpenThemesManager_Click" Width="50" Height="25"/>
             </Grid>
         </Border>
 

@@ -30,10 +30,10 @@
 
         </StackPanel>
 
-        <Button x:Name="OKButton" Content="OK" Cursor="Hand" Foreground="AliceBlue" FontFamily="Outfit" FontWeight="Bold" Template="{StaticResource DefaultButtons}" Height="30" Click="OKButton_Click" Width="50" Margin="10,185,440,10">
+        <Button x:Name="OKButton" Content="OK" Style="{StaticResource DefaultButtons}" Height="30" Click="OKButton_Click" Width="50" Margin="10,185,440,10">
         </Button>
 
-        <Button x:Name="CancelButton" Content="Cancel" Cursor="Hand" Foreground="AliceBlue" FontFamily="Outfit" FontWeight="Bold" Template="{StaticResource DefaultButtons}" Height="30" Click="CancelButton_Click" Width="50" Margin="65,185,385,10">
+        <Button x:Name="CancelButton" Content="Cancel" Style="{StaticResource DefaultButtons}" Height="30" Click="CancelButton_Click" Width="50" Margin="65,185,385,10">
         </Button>
 
         <Rectangle x:Name="CloseButton" Style="{DynamicResource IconsStyle}" Height="25" Width="25" Margin="465,10,10,190" MouseLeftButtonDown="CloseButton_MouseLeftButtonDown" Panel.ZIndex="3">

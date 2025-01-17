@@ -71,8 +71,8 @@
         </StackPanel>
 
         <!-- Buttons -->
-        <Button x:Name="CancelRenameButton" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="10,0,0,0" Height="30" Width="50" Content="Cancel" FontFamily="Outfit" FontWeight="Bold" Cursor="Hand" Foreground="AliceBlue" Template="{StaticResource DefaultButtons}" Click="CancelButton_Click"/>
-        <Button x:Name="SaveRenameButton" Grid.Row="1" Grid.Column="1" Height="30" Width="50" HorizontalAlignment="Left" Content="Save" FontFamily="Outfit" FontWeight="Bold" Cursor="Hand" Foreground="AliceBlue" Template="{StaticResource DefaultButtons}" IsDefault="True" Click="SaveButton_Click"/>
+        <Button x:Name="CancelRenameButton" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="10,0,0,0" Height="30" Width="50" Content="Cancel" Style="{StaticResource DefaultButtons}" Click="CancelButton_Click"/>
+        <Button x:Name="SaveRenameButton" Grid.Row="1" Grid.Column="1" Height="30" Width="50" HorizontalAlignment="Left" Content="Save" Style="{StaticResource DefaultButtons}" IsDefault="True" Click="SaveButton_Click"/>
     </Grid>
 </Window>
 

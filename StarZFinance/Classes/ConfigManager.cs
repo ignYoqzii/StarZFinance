@@ -8,7 +8,7 @@ namespace StarZFinance.Classes
         // Default values for the config
         private static readonly Dictionary<string, object> DefaultSettings = new()
         {
-            { "DiscordRPC", false },
+            { "DiscordRPC", true },
             { "DiscordRPCIdleStatus", "Saving for a dream vacation !" },
             { "Theme", "LightTheme" }
         };

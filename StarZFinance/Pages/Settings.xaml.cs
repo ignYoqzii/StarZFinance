@@ -110,7 +110,7 @@ namespace StarZFinance.Pages
                 {
                     string message = theme == "CustomTheme" ? "Please create a custom theme using the Colors Manager before applying it." : "Invalid color values for the selected theme.";
 
-                    StarZMessageBox.ShowDialog(message, "Error!", false);
+                    StarZMessageBox.ShowDialog(message, "Error !", false);
                     checkBox.IsChecked = false;
                     return;
                 }
