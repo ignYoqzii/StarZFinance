@@ -39,9 +39,9 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Accent Color" FontSize="20" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Left" Margin="20,0,0,0" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}"/>
-                <TextBlock Text="First Color" FontSize="15" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Left" Margin="20,0,0,0" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}"/>
-                <TextBlock Text="Second Color" FontSize="15" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Left" Margin="20,0,0,0" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}"/>
+                <TextBlock Text="Accent Color" FontSize="20" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Left" Margin="20,0,0,0" FontWeight="Medium" FontFamily="{StaticResource DefaultFont}" Foreground="{DynamicResource TextColor}"/>
+                <TextBlock Text="First Color" FontSize="15" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Left" Margin="20,0,0,0" FontWeight="Medium" FontFamily="{StaticResource DefaultFont}" Foreground="{DynamicResource TextColor}"/>
+                <TextBlock Text="Second Color" FontSize="15" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Left" Margin="20,0,0,0" FontWeight="Medium" FontFamily="{StaticResource DefaultFont}" Foreground="{DynamicResource TextColor}"/>
                 <Border x:Name="ColorResultBorder" Background="{DynamicResource AccentColor}" CornerRadius="5" Grid.Column="1" VerticalAlignment="Center" Grid.Row="0" Width="47" Height="20" HorizontalAlignment="Right" Margin="0,0,20,0"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
                     <Border x:Name="AccentColor1Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="#FF0044EA" CornerRadius="5" Width="20" Height="20" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right"/>
@@ -67,7 +67,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Primary Background Color" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" FontFamily="Outfit" Margin="20,0,0,0" Foreground="{DynamicResource TextColor}"/>
+                <TextBlock Text="Primary Background Color" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" FontFamily="{StaticResource DefaultFont}" Margin="20,0,0,0" Foreground="{DynamicResource TextColor}"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
                     <Border x:Name="BGColor1Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="5" Width="20" Height="20"/>
                     <Rectangle ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectBGColor1_Click">
@@ -84,7 +84,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Secondary Background Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
+                <TextBlock Text="Secondary Background Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="{StaticResource DefaultFont}" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
                     <Border x:Name="BGColor2Border" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" BorderThickness="1" BorderBrush="{DynamicResource PrimaryBackgroundColor}" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="5" Width="20" Height="20"/>
                     <Rectangle ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectBGColor2_Click">
@@ -101,7 +101,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Sidebar Background Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
+                <TextBlock Text="Sidebar Background Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="{StaticResource DefaultFont}" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
                     <Border x:Name="SBColorBorder" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" BorderThickness="1" BorderBrush="{DynamicResource PrimaryBackgroundColor}" Background="{DynamicResource SideBarBackgroundColor}" CornerRadius="5" Width="20" Height="20"/>
                     <Rectangle ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectSBColor_Click">
@@ -118,7 +118,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Icon Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
+                <TextBlock Text="Icon Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="{StaticResource DefaultFont}" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
                     <Border x:Name="IconColorBorder" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="{DynamicResource IconColor}" CornerRadius="5" Width="20" Height="20"/>
                     <Rectangle ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectIconColor_Click">
@@ -135,7 +135,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Sidebar Icon Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
+                <TextBlock Text="Sidebar Icon Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="{StaticResource DefaultFont}" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
                     <Border x:Name="SBIconColorBorder" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" BorderThickness="1" BorderBrush="{DynamicResource PrimaryBackgroundColor}" Background="{DynamicResource SideBarIconColor}" CornerRadius="5" Width="20" Height="20"/>
                     <Rectangle ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectSBIconColor_Click">
@@ -152,7 +152,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Text Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
+                <TextBlock Text="Text Color" FontSize="15" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontFamily="{StaticResource DefaultFont}" Foreground="{DynamicResource TextColor}" Margin="20,0,0,0"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0">
                     <Border x:Name="TextColorBorder" ToolTipService.InitialShowDelay="0" ToolTip="{Binding Background.Color, RelativeSource={RelativeSource Self}}" Background="{DynamicResource TextColor}" CornerRadius="5" Width="20" Height="20"/>
                     <Rectangle ToolTip="Select a color." Style="{DynamicResource IconsStyle}" Height="22" Width="22" Margin="5,0,0,0" MouseLeftButtonDown="SelectTextColor_Click">

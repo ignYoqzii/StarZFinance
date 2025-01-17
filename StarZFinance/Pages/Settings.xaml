@@ -28,7 +28,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Personalize Your Application" FontSize="14" FontFamily="Outfit" FontWeight="Bold" Margin="20,0,0,0" Foreground="{DynamicResource TextColor}" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Text="Personalize Your Application" FontSize="14" FontFamily="{StaticResource DefaultFont}" FontWeight="Bold" Margin="20,0,0,0" Foreground="{DynamicResource TextColor}" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="3">
                     <CheckBox x:Name="CheckBoxLightTheme" Style="{StaticResource ThemeCheckBoxStyle}" Background="#f3f4f9" BorderBrush="{DynamicResource AccentColor}" VerticalAlignment="Center" Tag="LightTheme" Checked="CheckBoxTheme_Checked" />
                     <CheckBox x:Name="CheckBoxDarkTheme" Style="{StaticResource ThemeCheckBoxStyle}" Background="#1c1c1c" BorderBrush="{DynamicResource AccentColor}" VerticalAlignment="Center" Tag="DarkTheme" Margin="20,0,0,0" Checked="CheckBoxTheme_Checked" />
@@ -47,7 +47,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0">
-                    <TextBlock Text="Colors Manager" FontSize="12" FontFamily="Outfit" Opacity="0.8" FontWeight="Medium" Margin="20,0,0,0" Foreground="{DynamicResource TextColor}" TextAlignment="Center"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock Text="Colors Manager" FontSize="12" FontFamily="{StaticResource DefaultFont}" Opacity="0.8" FontWeight="Medium" Margin="20,0,0,0" Foreground="{DynamicResource TextColor}" TextAlignment="Center"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Rectangle ToolTip="Restore the currently applied themes to default." Style="{DynamicResource IconsStyle}" Width="15" Height="15" Margin="10,0,0,0" VerticalAlignment="Center" MouseLeftButtonDown="ResetAllThemes_MouseLeftButtonDown">
                         <Rectangle.OpacityMask>
                             <ImageBrush ImageSource="/Resources/Reset.png" RenderOptions.BitmapScalingMode="HighQuality" />
@@ -67,10 +67,10 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="More Settings" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Center" Foreground="{DynamicResource TextColor}" FontFamily="Outfit" FontWeight="Bold" FontSize="20" Margin="20,0,0,0"/>
+                <TextBlock Text="More Settings" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Center" Foreground="{DynamicResource TextColor}" FontFamily="{StaticResource DefaultFont}" FontWeight="Bold" FontSize="20" Margin="20,0,0,0"/>
                 <Grid Grid.Column="2" VerticalAlignment="Center">
                     <TextBox x:Name="SearchSettingTextBox" Style="{StaticResource DefaultTextBoxes}" TextAlignment="Left" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="200" Margin="0,0,20,0" TextChanged="SearchSettingTextBox_TextChanged"/>
-                    <TextBlock x:Name="SearchSettingTextBlock" Text="Search" Panel.ZIndex="1" VerticalAlignment="Center" IsHitTestVisible="False" Opacity="0.7" HorizontalAlignment="Left" TextAlignment="Center" Foreground="{DynamicResource TextColor}" FontFamily="Outfit" FontWeight="Medium" FontSize="12" Margin="5,0,0,0"/>
+                    <TextBlock x:Name="SearchSettingTextBlock" Text="Search" Panel.ZIndex="1" VerticalAlignment="Center" IsHitTestVisible="False" Opacity="0.7" HorizontalAlignment="Left" TextAlignment="Center" Foreground="{DynamicResource TextColor}" FontFamily="{StaticResource DefaultFont}" FontWeight="Medium" FontSize="12" Margin="5,0,0,0"/>
                 </Grid>
             </Grid>
         </Border>
@@ -87,8 +87,8 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Margin="10,0,0,0" VerticalAlignment="Center" Grid.Column="0">
-                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontWeight="Bold" FontFamily="Outfit" Foreground="{DynamicResource TextColor}" FontSize="14" Margin="0,0,0,2.5"/>
-                                    <TextBlock Text="{Binding Description}" VerticalAlignment="Center" FontSize="12" Opacity="0.8" FontFamily="Outfit" FontWeight="Medium" Foreground="{DynamicResource TextColor}" Margin="0,2.5,0,0"/>
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontWeight="Bold" FontFamily="{StaticResource DefaultFont}" Foreground="{DynamicResource TextColor}" FontSize="14" Margin="0,0,0,2.5"/>
+                                    <TextBlock Text="{Binding Description}" VerticalAlignment="Center" FontSize="12" Opacity="0.8" FontFamily="{StaticResource DefaultFont}" FontWeight="Medium" Foreground="{DynamicResource TextColor}" Margin="0,2.5,0,0"/>
                                 </StackPanel>
                                 <ContentControl x:Name="SettingControl" Content="{Binding Type}" Loaded="SettingControl_Loaded" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
                             </Grid>

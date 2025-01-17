@@ -9,6 +9,8 @@
                 <ResourceDictionary Source="/Themes/ColorsManager.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <FontFamily x:Key="DefaultFont">/StarZFinance;component/Resources/Outfit.ttf#Outfit</FontFamily>
+
             <Style TargetType="Rectangle" x:Key="IconsStyle">
                 <Setter Property="Opacity" Value="0.8"/>
                 <Setter Property="Cursor" Value="Hand"/>
@@ -82,7 +84,7 @@
 
             <Style x:Key="DefaultButtons" TargetType="Button">
                 <Setter Property="Foreground" Value="AliceBlue"/>
-                <Setter Property="FontFamily" Value="Outfit"/>
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="Background" Value="{DynamicResource AccentColor}"/>
                 <Setter Property="BorderThickness" Value="0"/>
@@ -213,7 +215,7 @@
                     </Setter.Value>
                 </Setter>
                 <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
-                <Setter Property="FontFamily" Value="Outfit" />
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFont}" />
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="FontWeight" Value="Medium" />
                 <Setter Property="VerticalAlignment" Value="Bottom" />

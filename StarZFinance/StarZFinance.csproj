@@ -27,11 +27,15 @@
 		<None Remove="Resources/Import.png" />
 		<None Remove="Resources/Info.png" />
 		<None Remove="Resources\CustomTheme.png" />
+		<None Remove="Resources\Outfit.ttf" />
 		<None Remove="Resources\Reset.png" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Content Include="Resources/starz.ico" />
+		<Content Include="Resources/Outfit.ttf">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
