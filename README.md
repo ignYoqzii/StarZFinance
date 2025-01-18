@@ -2,13 +2,13 @@
 
 - [Version Française](README-FR.md)  
 
-StarZ Finance is an advanced, all-in-one financial application designed to empower users with AI-driven market predictions and personalized tools to manage their finances. Born from the experiences of developing **StarZ Launcher for Minecraft Bedrock Edition** and shaped by academic learning in Python and data science, StarZ Finance aims to deliver a seamless user-friendly interface combined with cutting-edge AI and mathematical modeling.
+StarZ Finance is an advanced, all-in-one financial application designed to empower users with AI-driven market predictions and personalized tools to manage their finances. Born from the experiences of developing **StarZ Launcher for Minecraft Bedrock Edition** and shaped by academic learning in Python and sciences, StarZ Finance aims to deliver a seamless user-friendly interface combined with cutting-edge AI and mathematical modeling.
 
 ---
 
 ## 🚀 About the Project  
 
-StarZ Finance is our **final project at Cegep**, representing the culmination of our programming journey and academic training. Developed in collaboration with my friend and colleague, our mission is to create a versatile financial tool enriched with advanced features like:  
+StarZ Finance is our **final project at Cegep**, representing the culmination of our programming journey and Sciences program. Developed in collaboration with my friend and colleague, our mission is to create a versatile financial tool enriched with advanced features like:  
 
 - **AI-Powered Stock Predictions:** Utilizing a Long Short-Term Memory (LSTM) neural network to analyze financial data and predict market trends.
 - **Mathematical Modeling:** A complementary model based on advanced mathematical techniques for comparison with the AI model.
