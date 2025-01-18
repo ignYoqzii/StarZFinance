@@ -1,4 +1,4 @@
-# 🌟 StarZ Finance 🌟
+# StarZ Finance
 
 - [Version Française](README-FR.md)  
 
