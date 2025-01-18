@@ -59,4 +59,4 @@ StarZ Finance représente non seulement une quête d'excellence académique, mai
 
 ## 🌐 Licence  
 
-Ce projet est sous licence **MIT License**. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+Ce projet est sous licence **MIT License**. Voir le fichier [LICENSE](LICENSE.md) pour plus de détails.
