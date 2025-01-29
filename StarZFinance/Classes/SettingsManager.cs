@@ -43,6 +43,13 @@ namespace StarZFinance.Classes
                     Description = "Uses ChatGPT from OpenAI to analyse the news and optimizes the prediction's accuracy.",
                     Type = SettingType.CheckBox,
                     DefaultValue = true
+                },
+                new Setting 
+                {
+                    Name = "Debugging And Logging", // For future implementation
+                    Description = "Enable or disable the creation of logs for the application.",
+                    Type = SettingType.CheckBox,
+                    DefaultValue = true
                 }
             ];
         }
