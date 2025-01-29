@@ -166,8 +166,8 @@
         <Border BorderThickness="0" Grid.Row="7" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="10" Margin="10,5,10,5">
 
             <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">
-                <Button Content="Save" Height="20" Width="50" Style="{StaticResource DefaultButtons}" Click="OkButton_Click" IsDefault="True"/>
-                <Button Content="Cancel" Height="20" Width="50" Margin="5,0,0,0" Style="{StaticResource DefaultButtons}" Click="CancelButton_Click"/>
+                <Button Content="Save" Height="25" Width="50" Style="{StaticResource DefaultButtons}" Click="OkButton_Click" IsDefault="True"/>
+                <Button Content="Cancel" Height="25" Width="50" Margin="5,0,0,0" Style="{StaticResource DefaultButtons}" Click="CancelButton_Click"/>
             </StackPanel>
         </Border>
     </Grid>
