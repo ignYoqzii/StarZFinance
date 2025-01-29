@@ -4,8 +4,6 @@ using System.Windows;
 using Controls = System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using System.Windows.Media;
 
 namespace StarZFinance.Pages
 {
@@ -28,7 +26,7 @@ namespace StarZFinance.Pages
 
             if (SettingControl!.DataContext is not Setting setting) return;
 
-            if (setting.Type == "Button")
+            if (setting.Type == SettingType.Button)
             {
                 var button = new Controls.Button
                 {
@@ -41,7 +39,7 @@ namespace StarZFinance.Pages
                 button.Style = (Style)this.FindResource("DefaultButtons");
                 SettingControl.Content = button;
             }
-            else if (setting.Type == "CheckBox")
+            else if (setting.Type == SettingType.CheckBox)
             {
                 var checkBox = new Controls.CheckBox
                 {
@@ -63,7 +61,7 @@ namespace StarZFinance.Pages
                 checkBox.Style = (Style)this.FindResource("DefaultCheckBoxes");
                 SettingControl.Content = checkBox;
             }
-            else if (setting.Type == "TextBox")
+            else if (setting.Type == SettingType.TextBox)
             {
                 var textBox = new Controls.TextBox
                 {

@@ -17,7 +17,7 @@ namespace StarZFinance.Classes
                 {
                     Name = "Discord Rich Presence",
                     Description = "Enable or disable Discord Rich Presence for the application.",
-                    Type = "CheckBox",
+                    Type = SettingType.CheckBox,
                     DefaultValue = ConfigManager.GetDiscordRPC(),
                     Action = SetDiscordRPC
                 },
@@ -25,7 +25,7 @@ namespace StarZFinance.Classes
                 {
                     Name = "Discord Rich Presence Idle Status",
                     Description = "Change your Discord status when idling in the application.",
-                    Type = "TextBox",
+                    Type = SettingType.TextBox,
                     DefaultValue = ConfigManager.GetDiscordRPCIdleStatus(),
                     Action = SetDiscordRPCIdleStatus
                 },
@@ -33,7 +33,7 @@ namespace StarZFinance.Classes
                 {
                     Name = "Open Application Folder",
                     Description = "Opens the folder where app resources are stored.",
-                    Type = "Button",
+                    Type = SettingType.Button,
                     DefaultValue = "Open", // Button's text
                     Action = (value) => OpenAppFolder()
                 },
@@ -41,7 +41,7 @@ namespace StarZFinance.Classes
                 {
                     Name = "Use OpenAI", // For future implementation
                     Description = "Uses ChatGPT from OpenAI to analyse the news and optimizes the prediction's accuracy.",
-                    Type = "CheckBox",
+                    Type = SettingType.CheckBox,
                     DefaultValue = true
                 }
             ];
@@ -102,8 +102,15 @@ namespace StarZFinance.Classes
     {
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public string? Type { get; set; }  // "Button", "CheckBox", "TextBox"
+        public SettingType Type { get; set; }
         public object? DefaultValue { get; set; }
         public Action<object>? Action { get; set; }
+    }
+
+    public enum SettingType
+    {
+        CheckBox,
+        TextBox,
+        Button
     }
 }
