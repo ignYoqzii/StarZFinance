@@ -2,8 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Intrinsics.Arm;
-using System.Windows;
 
 namespace StarZFinance.Classes
 {
@@ -38,6 +36,13 @@ namespace StarZFinance.Classes
                     Type = "Button",
                     DefaultValue = "Open", // Button's text
                     Action = (value) => OpenAppFolder()
+                },
+                new Setting
+                {
+                    Name = "Use OpenAI", // For future implementation
+                    Description = "Uses ChatGPT from OpenAI to analyse the news and optimizes the prediction's accuracy.",
+                    Type = "CheckBox",
+                    DefaultValue = true
                 }
             ];
         }
@@ -78,13 +83,11 @@ namespace StarZFinance.Classes
         {
             try
             {
-                // Get the text value from the TextBox
                 ConfigManager.SetDiscordRPCIdleStatus((string)status);
 
                 bool isDiscordRPCEnabled = ConfigManager.GetDiscordRPC();
                 if (isDiscordRPCEnabled)
                 {
-                    var presence = DiscordRichPresenceManager.DiscordClient.CurrentPresence;
                     DiscordRichPresenceManager.IdlePresence((string)status);
                 }
             }

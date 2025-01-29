@@ -1,5 +1,1 @@
-import numpy as np
-
-np.sqrt()
-
-# Test
+# Python (LSTM) script will be here.
