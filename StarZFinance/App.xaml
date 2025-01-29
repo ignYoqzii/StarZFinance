@@ -11,7 +11,7 @@
 
             <FontFamily x:Key="DefaultFont">/StarZFinance;component/Resources/Outfit.ttf#Outfit</FontFamily>
 
-            <Style TargetType="Rectangle" x:Key="IconsStyle">
+            <Style x:Key="IconsStyle" TargetType="Rectangle">
                 <Setter Property="Opacity" Value="0.8"/>
                 <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="Fill" Value="{DynamicResource IconColor}"/>
@@ -204,7 +204,7 @@
                 </Setter>
             </Style>
 
-            <Style TargetType="TextBox" x:Key="DefaultTextBoxes">
+            <Style x:Key="DefaultTextBoxes" TargetType="TextBox">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="TextBox">
