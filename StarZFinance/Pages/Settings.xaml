@@ -4,7 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:StarZFinance.Pages"
-      xmlns:Classes="clr-namespace:StarZFinance.Classes" x:Class="StarZFinance.Pages.Settings"
+      xmlns:Classes="clr-namespace:StarZFinance.Classes"
+      x:Class="StarZFinance.Pages.Settings"
+      xmlns:localization="clr-namespace:StarZFinance.Localization;assembly=StarZFinance"
       mc:Ignorable="d"
       d:DesignHeight="470" d:DesignWidth="790"
       Title="Settings">

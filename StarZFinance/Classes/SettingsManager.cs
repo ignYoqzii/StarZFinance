@@ -122,7 +122,6 @@ namespace StarZFinance.Classes
         private void SetLanguage(object lang)
         {
             string selectedLanguage = lang.ToString()!;
-            LocalizationManager.Instance.LoadLanguage(selectedLanguage);  // Save the language
 
             StarZMessageBox.ShowDialog("Application will restart for changes to take effect.", "App Language Warning", false);
 

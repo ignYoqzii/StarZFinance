@@ -12,8 +12,6 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="Localization\en.json" />
-		<None Remove="Localization\fr.json" />
 		<None Remove="Resources/StarZLogo.png" />
 		<None Remove="Resources/StarZLogoBluePart.png" />
 		<None Remove="Resources/StarZLogoWhitePart.png" />
@@ -42,11 +40,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Localization\en.json" />
-	  <EmbeddedResource Include="Localization\fr.json" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Resource Include="Resources/StarZLogo.png" />
 		<Resource Include="Resources/StarZLogoBluePart.png" />
 		<Resource Include="Resources/StarZLogoWhitePart.png" />
@@ -72,6 +65,24 @@
 
 	<ItemGroup>
 	  <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Localization\Strings.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Strings.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Localization\Strings.fr.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Localization\Strings.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 </Project>
