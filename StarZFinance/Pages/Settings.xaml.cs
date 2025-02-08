@@ -75,6 +75,35 @@ namespace StarZFinance.Pages
                 textBox.Style = (Style)this.FindResource("DefaultTextBoxes");
                 SettingControl.Content = textBox;
             }
+            else if (setting.Type == SettingType.ComboBox)
+            {
+                var comboBox = new Controls.ComboBox
+                {
+                    Height = 25,
+                    Width = 100,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    SelectedIndex = (int)setting.DefaultValue!
+                };
+
+                foreach (var item in setting.ComboBoxItems!)
+                {
+                    var comboBoxItem = new ComboBoxItem
+                    {
+                        Content = item.Key,
+                        Tag = item.Value,
+                        Style = (Style)this.FindResource("DefaultComboBoxItem")
+                };
+                    comboBox.Items.Add(comboBoxItem);
+                }
+
+                comboBox.SelectionChanged += (s, args) =>
+                {
+                    var selectedItem = (ComboBoxItem)comboBox.SelectedItem;
+                    setting.Action?.Invoke(selectedItem?.Tag!);
+                };
+                comboBox.Style = (Style)this.FindResource("DefaultComboBox");
+                SettingControl.Content = comboBox;
+            }
         }
 
         /// <summary>

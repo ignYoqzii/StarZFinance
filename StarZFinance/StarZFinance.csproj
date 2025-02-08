@@ -12,6 +12,8 @@
   </PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="Localization\en.json" />
+		<None Remove="Localization\fr.json" />
 		<None Remove="Resources/StarZLogo.png" />
 		<None Remove="Resources/StarZLogoBluePart.png" />
 		<None Remove="Resources/StarZLogoWhitePart.png" />
@@ -37,6 +39,11 @@
 		<Content Include="Resources/Outfit.ttf">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Localization\en.json" />
+	  <EmbeddedResource Include="Localization\fr.json" />
 	</ItemGroup>
 
 	<ItemGroup>

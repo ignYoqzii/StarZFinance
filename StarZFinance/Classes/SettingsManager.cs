@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Controls;
+using System.Windows;
 
 namespace StarZFinance.Classes
 {
@@ -16,7 +18,7 @@ namespace StarZFinance.Classes
                 new Setting
                 {
                     Name = "Discord Rich Presence",
-                    Description = "Enable or disable Discord Rich Presence for the application.",
+                    Description = "Enable or disable Discord Rich Presence features.",
                     Type = SettingType.CheckBox,
                     DefaultValue = ConfigManager.GetDiscordRPC(),
                     Action = SetDiscordRPC
@@ -50,6 +52,19 @@ namespace StarZFinance.Classes
                     Description = "Enable or disable the creation of logs for the application.",
                     Type = SettingType.CheckBox,
                     DefaultValue = true
+                },
+                new Setting
+                {
+                    Name = "Language", // For future implementation
+                    Description = "Language used by the application.",
+                    Type = SettingType.ComboBox,
+                    DefaultValue = 0, // First item
+                    ComboBoxItems =
+                    [
+                        new KeyValuePair<string, object>("English", "en"),
+                        new KeyValuePair<string, object>("Français", "fr")
+                    ],
+                    Action = SetLanguage
                 }
             ];
         }
@@ -103,6 +118,18 @@ namespace StarZFinance.Classes
                 StarZMessageBox.ShowDialog($"Error updating Discord status: {ex.Message}", "Error !", false);
             }
         }
+
+        private void SetLanguage(object lang)
+        {
+            string selectedLanguage = lang.ToString()!;
+            LocalizationManager.Instance.LoadLanguage(selectedLanguage);  // Save the language
+
+            StarZMessageBox.ShowDialog("Application will restart for changes to take effect.", "App Language Warning", false);
+
+            // Restart the application
+            Process.Start(System.Windows.Application.ResourceAssembly.Location);  // Re-launch the application
+            System.Windows.Application.Current.Shutdown();
+        }
     }
 
     public class Setting
@@ -111,6 +138,7 @@ namespace StarZFinance.Classes
         public string? Description { get; set; }
         public SettingType Type { get; set; }
         public object? DefaultValue { get; set; }
+        public List<KeyValuePair<string, object>>? ComboBoxItems { get; set; }
         public Action<object>? Action { get; set; }
     }
 
@@ -118,6 +146,7 @@ namespace StarZFinance.Classes
     {
         CheckBox,
         TextBox,
-        Button
+        Button,
+        ComboBox
     }
 }
