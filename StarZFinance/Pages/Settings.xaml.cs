@@ -1,9 +1,9 @@
 ﻿using StarZFinance.Classes;
 using StarZFinance.Windows;
 using System.Windows;
-using Controls = System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Controls;
+using System.Windows.Input;
+using Controls = System.Windows.Controls;
 
 namespace StarZFinance.Pages
 {
@@ -92,7 +92,7 @@ namespace StarZFinance.Pages
                         Content = item.Key,
                         Tag = item.Value,
                         Style = (Style)this.FindResource("DefaultComboBoxItem")
-                };
+                    };
                     comboBox.Items.Add(comboBoxItem);
                 }
 

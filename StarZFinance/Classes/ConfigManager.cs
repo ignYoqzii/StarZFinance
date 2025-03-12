@@ -83,7 +83,7 @@ namespace StarZFinance.Classes
         public static bool GetDiscordRPC() => (bool)settings["DiscordRPC"];
         public static string GetDiscordRPCIdleStatus() => (string)settings["DiscordRPCIdleStatus"];
         public static string GetTheme() => (string)settings["Theme"];
-        
+
         public static void SetTheme(string newTheme) => UpdateSetting("Theme", newTheme);
         public static void SetDiscordRPC(bool value) => UpdateSetting("DiscordRPC", value);
         public static void SetDiscordRPCIdleStatus(string newIdleStatus) => UpdateSetting("DiscordRPCIdleStatus", newIdleStatus);

@@ -1,7 +1,7 @@
-﻿using System.Windows;
-using System.Windows.Media;
+﻿using StarZFinance.Classes;
+using System.Windows;
 using System.Windows.Controls;
-using StarZFinance.Classes;
+using System.Windows.Media;
 
 namespace StarZFinance.Windows
 {

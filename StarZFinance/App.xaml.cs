@@ -19,7 +19,7 @@ namespace StarZFinance
             try
             {
                 string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string starzFinancePath = Path.Combine(documentsPath, "StarZ Finance");;
+                string starzFinancePath = Path.Combine(documentsPath, "StarZ Finance"); ;
                 string logsPath = Path.Combine(starzFinancePath, "Logs");
                 string themePath = Path.Combine(starzFinancePath, "Theme");
 

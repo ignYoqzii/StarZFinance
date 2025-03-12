@@ -1,8 +1,6 @@
 ﻿using StarZFinance.Classes;
-using System;
 using System.Windows;
 using System.Windows.Input;
-using static StarZFinance.Windows.MainWindow;
 
 namespace StarZFinance.Windows
 {

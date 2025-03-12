@@ -2,8 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Windows.Controls;
-using System.Windows;
 
 namespace StarZFinance.Classes
 {
@@ -46,7 +44,7 @@ namespace StarZFinance.Classes
                     Type = SettingType.CheckBox,
                     DefaultValue = true
                 },
-                new Setting 
+                new Setting
                 {
                     Name = "Debugging And Logging", // For future implementation
                     Description = "Enable or disable the creation of logs for the application.",
@@ -72,8 +70,8 @@ namespace StarZFinance.Classes
         /// <summary>
         /// Logic for handling specific settings
         /// </summary>
-        
-        private void OpenAppFolder()
+
+        private static void OpenAppFolder()
         {
             string folderPath = Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "StarZ Finance")).FullName;
             Process.Start(new ProcessStartInfo

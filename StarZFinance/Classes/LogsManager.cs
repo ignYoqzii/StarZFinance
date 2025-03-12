@@ -1,5 +1,4 @@
 ﻿using StarZFinance.Windows;
-using System;
 using System.IO;
 
 namespace StarZFinance.Classes
