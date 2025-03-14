@@ -35,8 +35,8 @@ namespace StarZFinance.Classes
 
                 dynamic calculatorModule = Py.Import("LSTM");
 
-                // Call the AddInPython method
-                int result = calculatorModule.Calculator(5, 10);
+                // Call the Calculator function
+                int result = (int)calculatorModule.Calculator(5, 10);
                 textBlock.Text = result.ToString();
             }
 

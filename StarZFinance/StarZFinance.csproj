@@ -94,7 +94,7 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	  <None Update="EmbeddedPython\LICENSE.txt">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </None>
 	  <None Update="EmbeddedPython\pyexpat.pyd">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -103,13 +103,13 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	  <None Update="EmbeddedPython\python.exe">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </None>
 	  <None Update="EmbeddedPython\python3.dll">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </None>
 	  <None Update="EmbeddedPython\python313.dll">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </None>
 	  <None Update="EmbeddedPython\python313.zip">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -118,7 +118,7 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	  <None Update="EmbeddedPython\pythonw.exe">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </None>
 	  <None Update="EmbeddedPython\select.pyd">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -130,10 +130,10 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	  <None Update="EmbeddedPython\vcruntime140.dll">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </None>
 	  <None Update="EmbeddedPython\vcruntime140_1.dll">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </None>
 	  <None Update="EmbeddedPython\winsound.pyd">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

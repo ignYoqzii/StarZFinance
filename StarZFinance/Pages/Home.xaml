@@ -26,7 +26,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="TestPython" Text="Good evening, Yoqzii !" FontSize="25" FontFamily="{StaticResource DefaultFont}" Margin="15,0,0,0" FontWeight="Medium" Foreground="{DynamicResource TextColor}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TestPython" Text="Good evening, Yoqzii !" FontSize="10" FontFamily="{StaticResource DefaultFont}" Margin="15,0,0,0" FontWeight="Medium" Foreground="{DynamicResource TextColor}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Text="" FontSize="40" FontFamily="{StaticResource DefaultFont}" FontWeight="Medium" Foreground="{DynamicResource TextColor}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </Border>
@@ -39,7 +39,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="Current Version" FontFamily="{StaticResource DefaultFont}" FontWeight="Medium" Foreground="{DynamicResource TextColor}" FontSize="20" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0" />
                 <TextBlock Text="1.0.0" FontFamily="{StaticResource DefaultFont}" FontWeight="ExtraBold" Foreground="{DynamicResource TextColor}" FontSize="40" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0" />
-                <Button Style="{DynamicResource DefaultButtons}" Width="120" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Check for Updates" Grid.Row="2" Margin="15,0,0,0" />
+                <Button Style="{DynamicResource DefaultButtons}" Width="120" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Check for Updates" Click="RunPythonTest_Click" Grid.Row="2" Margin="15,0,0,0" />
             </Grid>
         </Border>
         <Border CornerRadius="25" Grid.Row="1" Grid.Column="0" Background="{DynamicResource SecondaryBackgroundColor}" Margin="0,7,7,7">
