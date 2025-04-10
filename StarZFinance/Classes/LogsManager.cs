@@ -5,7 +5,7 @@ namespace StarZFinance.Classes
 {
     public static class LogsManager
     {
-        private static readonly string logDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "StarZ Finance", "Logs");
+        private static readonly string logDirectory = Path.Combine(App.StarZFinanceDirectory, "Logs");
 
         static LogsManager()
         {

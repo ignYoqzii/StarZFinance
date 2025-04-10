@@ -39,10 +39,11 @@ namespace StarZFinance.Classes
                 },
                 new Setting
                 {
-                    Name = "Use OpenAI", // For future implementation
-                    Description = "Uses ChatGPT from OpenAI to analyse the news and optimizes the prediction's accuracy.",
-                    Type = SettingType.CheckBox,
-                    DefaultValue = true
+                    Name = "Reset Model Parameters", // For future implementation
+                    Description = "Deletes the JSON config file to reset all model parameters to their default values.",
+                    Type = SettingType.Button,
+                    DefaultValue = "Reset", // Button's text
+                    Action = (value) => ResetModelParameters()
                 },
                 new Setting
                 {
@@ -73,12 +74,23 @@ namespace StarZFinance.Classes
 
         private static void OpenAppFolder()
         {
-            string folderPath = Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "StarZ Finance")).FullName;
+            string folderPath = Directory.CreateDirectory(App.StarZFinanceDirectory).FullName;
             Process.Start(new ProcessStartInfo
             {
                 FileName = folderPath,
                 UseShellExecute = true
             });
+        }
+
+        private static void ResetModelParameters()
+        {
+            string filePath = Path.Combine(App.StarZFinanceDirectory, "ModelParameters.json");
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                ModelParametersManager.InitializeDefaultParameters();
+                ModelParametersManager.SaveParametersToFile();
+            }
         }
 
         private void SetDiscordRPC(object value)

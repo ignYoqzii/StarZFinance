@@ -11,6 +11,7 @@ namespace StarZFinance
 
         private bool HasRun = false;
         private static readonly string logFileName = $"AppStartup.txt";
+        public static string StarZFinanceDirectory { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "StarZ Finance");
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -18,12 +19,10 @@ namespace StarZFinance
 
             try
             {
-                string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string starzFinancePath = Path.Combine(documentsPath, "StarZ Finance"); ;
-                string logsPath = Path.Combine(starzFinancePath, "Logs");
-                string themePath = Path.Combine(starzFinancePath, "Theme");
+                string logsPath = Path.Combine(StarZFinanceDirectory, "Logs");
+                string themePath = Path.Combine(StarZFinanceDirectory, "Theme");
 
-                EnsureDirectoryExists(starzFinancePath);
+                EnsureDirectoryExists(StarZFinanceDirectory);
                 EnsureDirectoryExists(logsPath);
                 EnsureDirectoryExists(themePath);
             }

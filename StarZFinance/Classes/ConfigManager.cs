@@ -10,10 +10,11 @@ namespace StarZFinance.Classes
         {
             { "DiscordRPC", true },
             { "DiscordRPCIdleStatus", "Saving for a dream vacation !" },
-            { "Theme", "LightTheme" }
+            { "Theme", "LightTheme" },
+            { "SelectedModel", "ARIMA" }
         };
 
-        private static readonly string configFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "StarZ Finance", "Config.txt");
+        private static readonly string configFilePath = Path.Combine(App.StarZFinanceDirectory, "Config.txt");
         private static readonly Dictionary<string, object> settings = new(DefaultSettings);
 
         static ConfigManager()
@@ -83,9 +84,11 @@ namespace StarZFinance.Classes
         public static bool GetDiscordRPC() => (bool)settings["DiscordRPC"];
         public static string GetDiscordRPCIdleStatus() => (string)settings["DiscordRPCIdleStatus"];
         public static string GetTheme() => (string)settings["Theme"];
+        public static string GetSelectedModel() => (string)settings["SelectedModel"];
 
         public static void SetTheme(string newTheme) => UpdateSetting("Theme", newTheme);
         public static void SetDiscordRPC(bool value) => UpdateSetting("DiscordRPC", value);
         public static void SetDiscordRPCIdleStatus(string newIdleStatus) => UpdateSetting("DiscordRPCIdleStatus", newIdleStatus);
+        public static void SetSelectedModel(string newModel) => UpdateSetting("SelectedModel", newModel);
     }
 }

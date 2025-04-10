@@ -10,49 +10,48 @@ namespace StarZFinance.Pages
     /// </summary>
     public partial class Dashboard : Page
     {
-        public Model SelectedModel;
+        public Model SelectedModel { get; private set; } = Model.ARIMA; // Default model
+        public string? SelectedTicker { get; private set; }
 
         public Dashboard()
         {
             InitializeComponent();
-            ModelChoiceComboBox.SelectedIndex = 0;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            if (Enum.TryParse(ConfigManager.GetSelectedModel(), out Model model))
+            {
+                SelectedModel = model;
+            }
+            ModelChoiceComboBox.SelectedIndex = (int)SelectedModel;
         }
 
         private void SearchParameterTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrEmpty(SearchParameterTextBox.Text))
-            {
-                SearchParameterTextBlock.Visibility = Visibility.Visible;
-                DisplayAllSettings();
-            }
-            else
-            {
-                SearchParameterTextBlock.Visibility = Visibility.Collapsed;
-                FilterSettings(SearchParameterTextBox.Text);
-            }
+            string searchText = SearchParameterTextBox.Text;
+            SearchParameterTextBlock.Visibility = string.IsNullOrEmpty(searchText) ? Visibility.Visible : Visibility.Collapsed;
+            ModelParametersItemsControl.ItemsSource = string.IsNullOrEmpty(searchText)
+                ? ModelParametersManager.ModelParameters[SelectedModel]
+                : ModelParametersManager.ModelParameters[SelectedModel].Where(p => p.Name.ToString().Contains(searchText, StringComparison.OrdinalIgnoreCase));
         }
 
-        private void DisplayAllSettings()
+        private void TickerTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ModelParametersItemsControl.ItemsSource = ModelParametersManager.ModelParameters[SelectedModel];
+            SelectedTicker = TickerTextBox.Text;
+            TickerTextBlock.Visibility = string.IsNullOrEmpty(SelectedTicker) ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        private void FilterSettings(string filterText)
+        private void ModelChoiceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) // Triggered when SelectedIndex or SelectedItem changes
         {
-            var filteredSettings = ModelParametersManager.ModelParameters[SelectedModel].Where(parameter => parameter.Name.ToString().Contains(filterText, StringComparison.OrdinalIgnoreCase)).ToList();
-            ModelParametersItemsControl.ItemsSource = filteredSettings;
-        }
-
-        private void ModelChoiceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ModelChoiceComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag is string tag)
+            if (ModelChoiceComboBox.SelectedItem is ComboBoxItem selectedItem &&
+                Enum.TryParse(selectedItem.Tag?.ToString(), out Model model))
             {
-                if (Enum.TryParse(tag, out Model model))
-                {
-                    SelectedModel = model;
-                    ModelParametersItemsControl.ItemsSource = ModelParametersManager.ModelParameters[SelectedModel];
-                    ModelParametersTitleTextBlock.Text = $"{selectedItem.Tag} Hyperparameters"; // translation here
-                }
+                SelectedModel = model;
+                ConfigManager.SetSelectedModel(selectedItem.Tag.ToString()!);
+                ModelParametersItemsControl.ItemsSource = ModelParametersManager.ModelParameters[SelectedModel];
+                ModelParametersTitleTextBlock.Text = $"{SelectedModel} Hyperparameters";
             }
         }
 
@@ -64,10 +63,34 @@ namespace StarZFinance.Pages
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void PredictButton_Click(object sender, RoutedEventArgs e)
         {
-            int epoch = (int)ModelParametersManager.GetParameterValue(SelectedModel, Parameter.Epochs)!;
-            StarZMessageBox.ShowDialog($"Epochs: {epoch+10}", "Epochs", false);
+            if (string.IsNullOrEmpty(SelectedTicker))
+            {
+                StarZMessageBox.ShowDialog("Please enter a valid ticker symbol.", "Error!", false);
+                return;
+            }
+            if (ModelParametersManager.ModelParameters[SelectedModel].Any(p => ModelParametersManager.IsValueNullOrEmpty(p.Value!) || !ModelParametersManager.IsValidParameterValue(p)))
+            {
+                StarZMessageBox.ShowDialog("Please fill in all the hyperparameters correctly.", "Error!", false);
+                return;
+            }
+
+            if (SelectedModel == Model.ARIMA)
+            {
+                int ARIMAepochs = (int)ModelParametersManager.GetParameterValue(SelectedModel, Parameter.Epochs)!;
+                // PythonManager.PredictARIMA(SelectedTicker, ARIMAepochs);
+            }
+            else if (SelectedModel == Model.LSTM)
+            {
+                int LSTMepochs = (int)ModelParametersManager.GetParameterValue(SelectedModel, Parameter.Epochs)!;
+                // PythonManager.PredictLSTM(SelectedTicker, LSTMepochs);
+            }
+            else
+            {
+                int GRUepochs = (int)ModelParametersManager.GetParameterValue(SelectedModel, Parameter.Epochs)!;
+                // PythonManager.PredictGRU(SelectedTicker, GRUepochs);
+            }
         }
     }
 }

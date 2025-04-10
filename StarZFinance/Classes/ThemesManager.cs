@@ -8,7 +8,7 @@ namespace StarZFinance.Classes
 {
     public static class ThemesManager
     {
-        private static readonly string themeFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "StarZ Finance", "Theme", "StarZTheme.szt");
+        private static readonly string themeFilePath = Path.Combine(App.StarZFinanceDirectory, "Theme", "StarZTheme.szt");
         private static readonly string logFileName = "ThemesManager.txt";
 
         static ThemesManager()
