@@ -30,7 +30,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Model &amp; Symbol" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Center" Foreground="{DynamicResource TextColor}" FontFamily="{StaticResource DefaultFont}" FontWeight="Medium" FontSize="15" Margin="15,0,0,0"/>
+                        <TextBlock Text="Model &amp; Ticker Symbol" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Center" Foreground="{DynamicResource TextColor}" FontFamily="{StaticResource DefaultFont}" FontWeight="Medium" FontSize="15" Margin="15,0,0,0"/>
                         <ComboBox x:Name="ModelChoiceComboBox" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,0" Style="{DynamicResource DefaultComboBox}" SelectionChanged="ModelChoiceComboBox_SelectionChanged">
                             <ComboBoxItem Content="ARIMA" Tag="ARIMA"/>
                             <ComboBoxItem Content="LSTM" Tag="LSTM"/>
@@ -53,6 +53,7 @@
                         </Border>
                     </Grid>
                 </Border>
+                <Image x:Name="PlotZone" Grid.Row="1" Margin="15" HorizontalAlignment="Center" />
                 <Button Style="{DynamicResource DefaultButtons}" Grid.Row="2" Height="25" Width="80" Content="Predict" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,15" Click="PredictButton_Click"/>
             </Grid>
         </Border>

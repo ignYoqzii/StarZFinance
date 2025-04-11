@@ -34,15 +34,16 @@ namespace StarZFinance.Classes
                 { Model.LSTM, new() {
                     new(Parameter.StartDate, "2010-01-01"),
                     new(Parameter.EndDate, DateTime.Now.ToString("yyyy-MM-dd")),
-                    new(Parameter.Features, "Close"),
+                    new(Parameter.Feature, "Close"),
                     new(Parameter.ShowFutureActual, false),
+                    new(Parameter.DaysToPredict, 5),
+                    new(Parameter.PlotWindow, 0),
                     new(Parameter.TimeStep, 60),
                     new(Parameter.LSTMUnits, 50),
                     new(Parameter.DropoutRate, 0.2),
                     new(Parameter.Epochs, 10),
                     new(Parameter.BatchSize, 32),
                     new(Parameter.Optimizer, "adam"),
-                    new(Parameter.DaysToPredict, 5),
                     new(Parameter.UseEarlyStopping, false),
                     new(Parameter.UseSentimentAnalysis, false),
                     new(Parameter.ScalingFactor, 5.0)
@@ -119,14 +120,15 @@ namespace StarZFinance.Classes
             { Parameter.Optimizer, "The optimizer to use for compiling the model." },
             { Parameter.StartDate, "The start date for fetching historical stock data (format: \"YYYY-MM-DD\")." },
             { Parameter.EndDate, "The end date for fetching historical stock data (format: \"YYYY-MM-DD\")." },
-            { Parameter.Features, "The list of column names to use as features, seperated by commas." },
+            { Parameter.Feature, "The stock price feature to use for training and predictions." },
             { Parameter.ShowFutureActual, "Whether to show actual future values with the predictions to evaluate model accuracy." },
             { Parameter.TimeStep, "The number of previous time steps to consider for predicting the next value." },
             { Parameter.LSTMUnits, "The number of units (neurons) in each LSTM layer." },
             { Parameter.DaysToPredict, "The number of days to predict." },
             { Parameter.UseEarlyStopping, "Whether to use early stopping to prevent overfitting." },
             { Parameter.UseSentimentAnalysis, "Whether to adjust predictions based on sentiment analysis." },
-            { Parameter.ScalingFactor, "The factor by which to scale the sentiment adjustment." }
+            { Parameter.ScalingFactor, "The factor by which to scale the sentiment adjustment." },
+            { Parameter.PlotWindow, "Number of most recent days to show in the plot, where 0 shows all data." }
         };
 
         [JsonPropertyName("Name")]
@@ -196,13 +198,14 @@ namespace StarZFinance.Classes
         Optimizer,
         StartDate,
         EndDate,
-        Features,
+        Feature,
         ShowFutureActual,
         TimeStep,
         LSTMUnits,
         DaysToPredict,
         UseEarlyStopping,
         UseSentimentAnalysis,
-        ScalingFactor
+        ScalingFactor,
+        PlotWindow
     }
 }

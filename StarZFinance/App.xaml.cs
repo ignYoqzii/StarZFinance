@@ -79,6 +79,7 @@ namespace StarZFinance
             try
             {
                 DiscordRichPresenceManager.TerminatePresence();
+                PythonManager.ShutdownPython();
                 // More can be added
                 LogsManager.Log("Application exited successfully.", logFileName);
             }

@@ -89,6 +89,12 @@
 		<None Update="Scripts\LSTM.py">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Update="Scripts\LSTMModel.py">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Scripts\YFinanceFetcher.py">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Scripts\yfinance_fetcher.py">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

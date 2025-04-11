@@ -16,7 +16,7 @@ namespace StarZFinance.Pages
 
         private void RunPythonTest_Click(object sender, RoutedEventArgs e)
         {
-            PythonManager.ExecutePythonCode(TestPython);
+
         }
     }
 }

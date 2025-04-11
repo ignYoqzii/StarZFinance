@@ -79,17 +79,24 @@ namespace StarZFinance.Pages
             if (SelectedModel == Model.ARIMA)
             {
                 int ARIMAepochs = (int)ModelParametersManager.GetParameterValue(SelectedModel, Parameter.Epochs)!;
-                // PythonManager.PredictARIMA(SelectedTicker, ARIMAepochs);
+                // PythonManager.PredictWithARIMA(SelectedTicker, ARIMAepochs);
             }
             else if (SelectedModel == Model.LSTM)
             {
-                int LSTMepochs = (int)ModelParametersManager.GetParameterValue(SelectedModel, Parameter.Epochs)!;
-                // PythonManager.PredictLSTM(SelectedTicker, LSTMepochs);
+                byte[] plotBuffer = PythonManager.PredictWithLSTM(SelectedTicker);
+
+                using var stream = new System.IO.MemoryStream(plotBuffer);
+                var bitmap = new System.Windows.Media.Imaging.BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = stream;
+                bitmap.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+                PlotZone.Source = bitmap;
             }
             else
             {
                 int GRUepochs = (int)ModelParametersManager.GetParameterValue(SelectedModel, Parameter.Epochs)!;
-                // PythonManager.PredictGRU(SelectedTicker, GRUepochs);
+                // PythonManager.PredictWithGRU(SelectedTicker, GRUepochs);
             }
         }
     }
