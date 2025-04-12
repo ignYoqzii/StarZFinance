@@ -1,4 +1,5 @@
-﻿using Python.Runtime;
+﻿using StarZFinance.Windows;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Controls;
 
@@ -6,91 +7,62 @@ namespace StarZFinance.Classes
 {
     public static class PythonManager
     {
-        static PythonManager()
-        {
-            // Initialize Python when the application starts
-            InitializePython();
-        }
+        // Get the current application's base directory
+        private static readonly string appBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
-        private static void InitializePython()
-        {
-            // Determine the path to the embedded Python DLL
-            string pythonDllPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmbeddedPython", "python312.dll");
-            Environment.SetEnvironmentVariable("PYTHONNET_PYDLL", pythonDllPath);
+        // Path to the Scripts folder inside the base directory
+        private static readonly string scriptsDirectory = Path.Combine(appBaseDirectory, "Scripts");
 
-            // Set the PYTHONHOME environment variable to the embedded Python directory
-            string pythonHome = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmbeddedPython");
-            Environment.SetEnvironmentVariable("PYTHONHOME", pythonHome);
-
-            // Add the embedded Python directory to the PATH environment variable
-            string path = Environment.GetEnvironmentVariable("PATH") ?? string.Empty;
-            Environment.SetEnvironmentVariable("PATH", pythonHome + ";" + path);
-
-            // Initialize the Python engine
-            PythonEngine.Initialize();
-        }
+        // Path to the Python executable
+        private static readonly string pythonExe = Path.Combine(appBaseDirectory, "EmbeddedPython", "python.exe");
 
         public static void PredictWithARIMA()
         {
         }
 
-        public static byte[] PredictWithLSTM(string selectedTicker)
+        public static string? PredictWithLSTM(string ticker)
         {
-            // Get the parameters from the ModelParametersManager
-            int timestep = (int)ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.TimeStep)!;
-            string feature = ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.Feature)?.ToString()!;
-            int lstmUnits = (int)ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.LSTMUnits)!;
-            double dropoutRate = (double)ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.DropoutRate)!;
-            int epochs = (int)ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.Epochs)!;
-            int batchSize = (int)ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.BatchSize)!;
-            string optimizer = ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.Optimizer)?.ToString()!;
-            bool earlyStopping = (bool)ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.UseEarlyStopping)!;
-            bool showFutureActual = (bool)ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.ShowFutureActual)!;
-            bool useSentimentAnalysis = (bool)ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.UseSentimentAnalysis)!;
-            double scalingFactor = (double)ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.ScalingFactor)!;
-            int plotWindow = (int)ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.PlotWindow)!;
-            string ticker = selectedTicker;
-            string startDate = ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.StartDate)?.ToString()!;
-            string endDate = ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.EndDate)?.ToString()!;
-            int daysToPredict = (int)ModelParametersManager.GetParameterValue(Model.LSTM, Parameter.DaysToPredict)!;
-
-            using (Py.GIL())
+            try
             {
-                dynamic sys = Py.Import("sys");
-                string scriptFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Scripts");
-                sys.path.append(scriptFolderPath);
+                // Path to the LSTMModel.py script
+                string scriptPath = Path.Combine(scriptsDirectory, "LSTMModel.py");
 
-                dynamic lstmModule = Py.Import("LSTMModel");
-                dynamic predictor = lstmModule.StockPredictorLSTM(
-                    timestep,
-                    feature,
-                    lstmUnits,
-                    dropoutRate,
-                    epochs,
-                    batchSize,
-                    optimizer,
-                    earlyStopping,
-                    showFutureActual,
-                    useSentimentAnalysis,
-                    scalingFactor,
-                    plotWindow
-                    );
-                dynamic plotBuffer = predictor.run(ticker, startDate, endDate, daysToPredict);
+                // Ensure the script file exists
+                if (!File.Exists(scriptPath))
+                {
+                    StarZMessageBox.ShowDialog($"Script not found: {scriptPath}", "Error!", false);
+                    return null;
+                }
 
-                // Convert the Python BytesIO object to a C# byte array
-                byte[] buffer = plotBuffer.tobytes();
-                return buffer;
+                // Construct the arguments to pass to the Python script
+                string arguments = $"\"{scriptPath}\" \"{ticker}\"";  // Passing ticker as argument
+
+                // Set up the process start info
+                ProcessStartInfo psi = new()
+                {
+                    FileName = pythonExe,
+                    Arguments = arguments,
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                // Start the process and read the output
+                using Process? process = Process.Start(psi);
+                string output = process!.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+
+                return output.Trim();
+            }
+            catch (Exception ex)
+            {
+                StarZMessageBox.ShowDialog($"An error occurred: {ex.Message}", "Error!", false);
+                return null;
             }
         }
 
         public static void PredictWithGRU()
         {
-        }
-
-        public static void ShutdownPython()
-        {
-            // Shutdown the Python engine when the application closes
-            PythonEngine.Shutdown();
         }
     }
 }

@@ -8,7 +8,11 @@ namespace StarZFinance.Classes
     public static class ModelParametersManager
     {
         private static readonly string FilePath = Path.Combine(App.StarZFinanceDirectory, "ModelParameters.json");
-        private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
+        private static readonly JsonSerializerOptions JsonOptions = new()
+        {
+            WriteIndented = true,
+            Converters = { new JsonStringEnumConverter() } // This converts enums to string names
+        };
 
         public static Dictionary<Model, ObservableCollection<ModelParameter>> ModelParameters { get; set; } = [];
 
@@ -32,7 +36,7 @@ namespace StarZFinance.Classes
                     new(Parameter.BatchSize, 32)
                 } },
                 { Model.LSTM, new() {
-                    new(Parameter.StartDate, "2010-01-01"),
+                    new(Parameter.StartDate, "2020-01-01"),
                     new(Parameter.EndDate, DateTime.Now.ToString("yyyy-MM-dd")),
                     new(Parameter.Feature, "Close"),
                     new(Parameter.ShowFutureActual, false),
@@ -41,12 +45,12 @@ namespace StarZFinance.Classes
                     new(Parameter.TimeStep, 60),
                     new(Parameter.LSTMUnits, 50),
                     new(Parameter.DropoutRate, 0.2),
-                    new(Parameter.Epochs, 10),
+                    new(Parameter.Epochs, 15),
                     new(Parameter.BatchSize, 32),
                     new(Parameter.Optimizer, "adam"),
                     new(Parameter.UseEarlyStopping, false),
                     new(Parameter.UseSentimentAnalysis, false),
-                    new(Parameter.ScalingFactor, 5.0)
+                    new(Parameter.ScalingFactor, 0.5)
                 } },
                 { Model.GRU, new() {
                     new(Parameter.Epochs, 150),
@@ -132,6 +136,7 @@ namespace StarZFinance.Classes
         };
 
         [JsonPropertyName("Name")]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public Parameter Name { get; }
 
         [JsonPropertyName("Description")]

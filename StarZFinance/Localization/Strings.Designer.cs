@@ -68,23 +68,5 @@ namespace StarZFinance.Localization {
                 return ResourceManager.GetString("Test", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string Test2 {
-            get {
-                return ResourceManager.GetString("Test2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string Test3 {
-            get {
-                return ResourceManager.GetString("Test3", resourceCulture);
-            }
-        }
     }
 }

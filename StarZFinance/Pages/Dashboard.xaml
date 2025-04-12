@@ -54,7 +54,8 @@
                     </Grid>
                 </Border>
                 <Image x:Name="PlotZone" Grid.Row="1" Margin="15" HorizontalAlignment="Center" />
-                <Button Style="{DynamicResource DefaultButtons}" Grid.Row="2" Height="25" Width="80" Content="Predict" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,15" Click="PredictButton_Click"/>
+                <TextBlock x:Name="PredictionStatusTextBlock" Grid.Row="1" Text="Nothing to display at the moment. Make predictions now!" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{DynamicResource TextColor}" FontFamily="{StaticResource DefaultFont}" FontWeight="Medium" FontSize="15"/>
+                <Button Style="{DynamicResource DefaultButtons}" Grid.Row="2" Height="25" Width="100" Content="Train &amp; Predict" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,15" Click="TrainAndPredictButton_Click"/>
             </Grid>
         </Border>
         <Border CornerRadius="15" Grid.Row="1" Height="50" Background="{DynamicResource SecondaryBackgroundColor}" Margin="0,5,0,5">

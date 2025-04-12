@@ -1,7 +1,10 @@
 ﻿using StarZFinance.Classes;
 using StarZFinance.Windows;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 
 namespace StarZFinance.Pages
 {
@@ -63,40 +66,65 @@ namespace StarZFinance.Pages
             }
         }
 
-        private void PredictButton_Click(object sender, RoutedEventArgs e)
+        private async void TrainAndPredictButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(SelectedTicker))
             {
                 StarZMessageBox.ShowDialog("Please enter a valid ticker symbol.", "Error!", false);
                 return;
             }
-            if (ModelParametersManager.ModelParameters[SelectedModel].Any(p => ModelParametersManager.IsValueNullOrEmpty(p.Value!) || !ModelParametersManager.IsValidParameterValue(p)))
+
+            if (ModelParametersManager.ModelParameters[SelectedModel].Any(p =>
+                ModelParametersManager.IsValueNullOrEmpty(p.Value!) ||
+                !ModelParametersManager.IsValidParameterValue(p)))
             {
                 StarZMessageBox.ShowDialog("Please fill in all the hyperparameters correctly.", "Error!", false);
                 return;
             }
 
-            if (SelectedModel == Model.ARIMA)
+            PredictionStatusTextBlock.Text = "Training the model can take several minutes. UI may freeze. Please wait...";
+            switch (SelectedModel)
             {
-                int ARIMAepochs = (int)ModelParametersManager.GetParameterValue(SelectedModel, Parameter.Epochs)!;
-                // PythonManager.PredictWithARIMA(SelectedTicker, ARIMAepochs);
-            }
-            else if (SelectedModel == Model.LSTM)
-            {
-                byte[] plotBuffer = PythonManager.PredictWithLSTM(SelectedTicker);
+                case Model.ARIMA:
+                    // ARIMA logic here
+                    break;
 
-                using var stream = new System.IO.MemoryStream(plotBuffer);
-                var bitmap = new System.Windows.Media.Imaging.BitmapImage();
-                bitmap.BeginInit();
-                bitmap.StreamSource = stream;
-                bitmap.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
-                PlotZone.Source = bitmap;
+                case Model.LSTM:
+                    await HandleLSTMPredictions();
+                    PredictionStatusTextBlock.Text = "";
+                    break;
+
+                case Model.GRU:
+                    // GRU logic here
+                    break;
+            }
+        }
+
+        private async Task HandleLSTMPredictions()
+        {
+            string? result = await Task.Run(() => PythonManager.PredictWithLSTM(SelectedTicker!));
+            if (result != null)
+            {
+                try
+                {
+                    byte[] imageBytes = Convert.FromBase64String(result);
+                    using MemoryStream ms = new(imageBytes);
+                    BitmapImage bitmapImage = new();
+                    ms.Seek(0, SeekOrigin.Begin);
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = ms;
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.EndInit();
+                    PlotZone.Source = bitmapImage;
+                }
+                catch (Exception ex)
+                {
+                    StarZMessageBox.ShowDialog($"An error occurred while processing the predictions result: {ex.Message}", "Error!", false);
+                }
             }
             else
             {
-                int GRUepochs = (int)ModelParametersManager.GetParameterValue(SelectedModel, Parameter.Epochs)!;
-                // PythonManager.PredictWithGRU(SelectedTicker, GRUepochs);
+                StarZMessageBox.ShowDialog("An error occurred while running the predictions.", "Error!", false);
             }
         }
     }

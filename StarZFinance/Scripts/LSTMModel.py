@@ -1,31 +1,39 @@
-import io
 import os
+import sys
+import io
+import json
+import base64
+import logging
+import warnings
+from pathlib import Path
 from typing import Tuple, Optional
 
+# Suppress warnings and logging messages.
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+warnings.filterwarnings("ignore")
+logging.getLogger().setLevel(logging.CRITICAL + 1)
+
+# Data and plotting.
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
-# Suppress TensorFlow logging messages (only show errors)
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # Disable TensorFlow warnings
-# Customize matplotlib style for a cleaner look.
-plt.style.use("https://github.com/dhaitz/matplotlib-stylesheets/raw/master/pitayasmoothie-dark.mplstyle")
-
-# Import scikit-learn scaling tool for data normalization.
-from sklearn.preprocessing import MinMaxScaler
-
-# Import Keras components for building an LSTM model.
+# Deep learning.
 from keras.models import Sequential
 from keras.layers import Input, LSTM, Dense, Dropout
 from keras.callbacks import EarlyStopping
+from sklearn.preprocessing import MinMaxScaler
 
-# Import Python Imaging Library to handle image operations.
-from PIL import Image
-
-# Import custom module for fetching stock market data.
+# Custom modules.
 import YFinanceFetcher as yff
+import JSONManager as jsonm
+
+# Custom matplotlib style.
+plt.style.use(
+    "https://github.com/dhaitz/matplotlib-stylesheets/raw/master/pitayasmoothie-dark.mplstyle"
+)
 
 
 class StockPredictorLSTM:
@@ -42,7 +50,7 @@ class StockPredictorLSTM:
         show_future_actual: bool = False,
         use_sentiment_analysis: bool = False,
         scaling_factor: float = 5,
-        plot_window: int = 0  # Number of days to show in plot, 0 for all data
+        plot_window: int = 0,  # Number of days to show in plot, 0 for all data
     ):
         """
         Initialize the LSTM stock predictor with user-provided hyperparameters.
@@ -89,7 +97,7 @@ class StockPredictorLSTM:
         Returns:
         - Tuple containing numpy arrays for the input sequences X and target values y.
         """
-        # Extract Close price and ensure it's in float format
+        # Extract feature values and ensure they are in float format
         data_values = data[self.feature].values.reshape(-1, 1).astype(float)
         # Create scaler to transform the data to [0, 1] range
         self.scaler = MinMaxScaler(feature_range=(0, 1))
@@ -118,19 +126,21 @@ class StockPredictorLSTM:
         Returns:
         - A compiled Keras Sequential model.
         """
-        model = Sequential([
-            # Define the input layer with the provided shape.
-            Input(shape=input_shape),
-            # First LSTM layer returns full sequence for the subsequent LSTM layer.
-            LSTM(units=self.lstm_units, return_sequences=True),
-            # Dropout for regularization, randomly dropping neurons during training.
-            Dropout(self.dropout_rate),
-            # Second LSTM layer, now returning only the last output in the sequence.
-            LSTM(units=self.lstm_units, return_sequences=False),
-            Dropout(self.dropout_rate),
-            # Dense layer that outputs the prediction, dimension equals number of features.
-            Dense(units=1)
-        ])
+        model = Sequential(
+            [
+                # Define the input layer with the provided shape.
+                Input(shape=input_shape),
+                # First LSTM layer returns full sequence for the subsequent LSTM layer.
+                LSTM(units=self.lstm_units, return_sequences=True),
+                # Dropout for regularization.
+                Dropout(self.dropout_rate),
+                # Second LSTM layer, now returning only the last output in the sequence.
+                LSTM(units=self.lstm_units, return_sequences=False),
+                Dropout(self.dropout_rate),
+                # Dense layer that outputs the prediction.
+                Dense(units=1),
+            ]
+        )
         # Compile the model with mean squared error loss and the chosen optimizer.
         model.compile(optimizer=self.optimizer, loss="mse")
         return model
@@ -156,21 +166,25 @@ class StockPredictorLSTM:
             early_stopping = EarlyStopping(
                 monitor="val_loss",
                 patience=3,  # Stop if validation loss doesn't improve for 3 consecutive epochs.
-                restore_best_weights=True
+                restore_best_weights=True,
             )
             self.model.fit(
-                X_train, y_train,
+                X_train,
+                y_train,
                 epochs=self.epochs,
                 batch_size=self.batch_size,
                 validation_split=0.2,
-                callbacks=[early_stopping]
+                callbacks=[early_stopping],
+                verbose=0,  # Suppress training output
             )
         else:
             self.model.fit(
-                X_train, y_train,
+                X_train,
+                y_train,
                 epochs=self.epochs,
                 batch_size=self.batch_size,
-                validation_split=0.2
+                validation_split=0.2,
+                verbose=0,  # Suppress training output
             )
 
     def predict(self, X_input: np.ndarray, days_to_predict: int = 5) -> np.ndarray:
@@ -188,18 +202,16 @@ class StockPredictorLSTM:
         Returns:
         - Future predicted values, transformed back to the original scale.
         """
-        predicted_values = []  # To store predictions for each future day.
+        predicted_values = []
         for _ in range(days_to_predict):
-            # Use the model to predict the next day. Note that verbose=0 hides training messages.
+            # Predict the next value (verbose=0 hides training messages).
             predicted = self.model.predict(X_input, verbose=0)
             # Append the predicted value (first element since predict returns a batch).
             predicted_values.append(predicted[0])
             # Update input window: remove the first time step and add the new prediction.
             X_input = np.concatenate(
-                [X_input[:, 1:, :], predicted.reshape(1, 1, -1)],
-                axis=1
+                [X_input[:, 1:, :], predicted.reshape(1, 1, -1)], axis=1
             )
-        # Convert list of predictions to a numpy array and scale back to original values.
         predicted_values = np.array(predicted_values)
         return self.scaler.inverse_transform(predicted_values)
 
@@ -225,42 +237,55 @@ class StockPredictorLSTM:
         future_pred: np.ndarray,
         ticker: str,
         future_dates: pd.DatetimeIndex,
-        future_actual: Optional[np.ndarray] = None
+        future_actual: Optional[np.ndarray] = None,
     ) -> io.BytesIO:
         """
         Create a plot showing the timeline of stock data and predictions.
         If plot_window is set, only shows the most recent portion of the training data.
         """
-        # Create the figure
         plt.figure(figsize=(12, 6))
-
-        # If plot_window is not 0, slice the data to show only the recent portion
         if self.plot_window > 0:
             window_start = max(0, len(train_dates) - self.plot_window)
             train_data = train_data[window_start:]
             train_dates = train_dates[window_start:]
             train_pred = train_pred[window_start:]
 
-        # Plot the historical stock prices
-        plt.plot(train_dates, train_data.reshape(-1), label="Real Stock Prices",
-                color="#18c0c4", linewidth=2)
+        plt.plot(
+            train_dates,
+            train_data.reshape(-1),
+            label="Real Stock Prices",
+            color="#18c0c4",
+            linewidth=2,
+        )
 
-        # Remove any rows with NaN values from training predictions for plotting
         valid_train_pred = train_pred[~np.isnan(train_pred).any(axis=1)]
-        valid_pred_dates = train_dates[-len(valid_train_pred):]
-        plt.plot(valid_pred_dates, valid_train_pred.reshape(-1), label="Training Predictions",
-                color="#f3907e", linestyle="--", linewidth=2)
+        valid_pred_dates = train_dates[-len(valid_train_pred) :]
+        plt.plot(
+            valid_pred_dates,
+            valid_train_pred.reshape(-1),
+            label="Training Predictions",
+            color="#f3907e",
+            linestyle="--",
+            linewidth=2,
+        )
 
-        # Plot future predictions with markers
-        plt.plot(future_dates, future_pred.reshape(-1), label="Future Predictions",
-                color="#f62196", linewidth=2)
+        plt.plot(
+            future_dates,
+            future_pred.reshape(-1),
+            label="Future Predictions",
+            color="#f62196",
+            linewidth=2,
+        )
 
-        # If actual future values are available, plot them for comparison
         if future_actual is not None:
-            plt.plot(future_dates, future_actual.reshape(-1), label="Real Future Prices",
-                    color="#fefeff", linestyle="--")
+            plt.plot(
+                future_dates,
+                future_actual.reshape(-1),
+                label="Real Future Prices",
+                color="#fefeff",
+                linestyle="--",
+            )
 
-        # Set chart title, labels, legend and grid
         plt.xlabel("Date", fontsize=12)
         plt.ylabel("Stock Price", fontsize=12)
         window_text = f" (Last {self.plot_window} days)" if self.plot_window else ""
@@ -268,43 +293,29 @@ class StockPredictorLSTM:
         plt.legend()
         plt.grid(True)
 
-        # Format x-axis dates for clarity
         total_days = (train_dates[-1] - train_dates[0]).days + len(future_dates)
-        if (self.plot_window > 0 and self.plot_window <= 90) or (self.plot_window == 0 and total_days <= 90):
+        if (self.plot_window > 0 and self.plot_window <= 90) or (
+            self.plot_window == 0 and total_days <= 90
+        ):
             plt.gca().xaxis.set_major_locator(mdates.WeekdayLocator())
         else:
             plt.gca().xaxis.set_major_locator(mdates.MonthLocator(interval=6))
-        plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+        plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
         plt.gcf().autofmt_xdate()  # Auto rotate date labels
         plt.tight_layout()
 
-        # Save the figure to a buffer in PNG format
         buf = io.BytesIO()
         canvas = FigureCanvas(plt.gcf())
         canvas.print_png(buf)
-        plt.close()  # Close the figure to free up resources
+        plt.close()  # Free up resources
         buf.seek(0)
         return buf
 
     def run(
-        self,
-        ticker: str,
-        start_date: str,
-        end_date: str,
-        days_to_predict: int = 5
-    ) -> Tuple[np.ndarray, io.BytesIO]:
+        self, ticker: str, start_date: str, end_date: str, days_to_predict: int = 5
+    ) -> io.BytesIO:
         """
         Execute the entire workflow: fetch data, prepare, train, predict, and plot.
-
-        Steps:
-         1. Fetch historical stock data using the custom YFinanceFetcher module.
-         2. Check if the dataset is large enough for training and forecasting.
-         3. Split the data into training and optional future actuals.
-         4. Prepare data by creating sliding window samples.
-         5. Train the model.
-         6. Generate predictions for both the training set and future dates.
-         7. Optionally adjust future predictions based on sentiment.
-         8. Generate a comprehensive timeline plot.
 
         Parameters:
         - ticker: Stock ticker symbol.
@@ -313,57 +324,52 @@ class StockPredictorLSTM:
         - days_to_predict: Number of days in the future to forecast.
 
         Returns:
-        - Tuple containing final predictions and a BytesIO object for the plot image.
+        - BytesIO object containing the plot image.
         """
-        # Fetch historical stock data for the given ticker and date range.
         stock_data = yff.fetch_stock_data(ticker, start_date, end_date)
-
-        # Check that there is enough data for the requested time steps and forecasting.
         if len(stock_data) < self.time_step + days_to_predict:
-            raise ValueError(f"Not enough data. Need at least {self.time_step + days_to_predict} days.")
+            raise ValueError(
+                f"Not enough data. Need at least {self.time_step + days_to_predict} days."
+            )
 
-        # If actual future data is to be shown, split the dataset accordingly.
         if self.show_future_actual:
             training_data = stock_data.iloc[:-days_to_predict]
-            future_actual = stock_data.iloc[-days_to_predict:][[self.feature]].values.astype(float)
+            future_actual = stock_data.iloc[-days_to_predict:][
+                [self.feature]
+            ].values.astype(float)
             train_dates = training_data.index
             future_dates = stock_data.iloc[-days_to_predict:].index
         else:
-            # Otherwise, use all available data for training and generate future dates.
             training_data = stock_data
             future_actual = None
             train_dates = training_data.index
             last_date = train_dates[-1]
-            # Generate future dates starting from the last date in the dataset.
-            future_dates = pd.date_range(start=last_date, periods=days_to_predict + 1)[1:]
+            future_dates = pd.date_range(start=last_date, periods=days_to_predict + 1)[
+                1:
+            ]
 
-        # Extract only the chosen feature data from the training dataset.
         full_data = training_data[[self.feature]].values.astype(float)
-
-        # Prepare sliding window training samples and corresponding targets.
         X, y_values = self.prepare_data(training_data)
-        # Train the LSTM model with prepared data.
         self.train(X, y_values)
 
-        # Obtain predictions for the entire training set (for plotting purposes).
         train_predictions = self.model.predict(X, verbose=0)
         train_predictions_rescaled = self.scaler.inverse_transform(train_predictions)
-        # Create a padded array to align predictions with original data timeline.
         padded_train_predictions = np.full((len(full_data), 1), np.nan)
-        padded_train_predictions[self.time_step:self.time_step + len(train_predictions)] = train_predictions_rescaled
+        padded_train_predictions[
+            self.time_step : self.time_step + len(train_predictions)
+        ] = train_predictions_rescaled
 
-        # Prepare the last window of data to serve as the starting input for forecasting.
-        last_n_days = training_data[[self.feature]].values[-self.time_step:]
+        last_n_days = training_data[[self.feature]].values[-self.time_step :]
         last_n_days_scaled = self.scaler.transform(last_n_days.astype(float))
         X_input = last_n_days_scaled.reshape(1, self.time_step, 1)
-        # Predict future values.
         future_predictions = self.predict(X_input, days_to_predict)
 
-        # Adjust future predictions if sentiment analysis is enabled.
-        final_predictions = (self.adjust_predictions(future_predictions)
-                             if self.use_sentiment_analysis else future_predictions)
+        final_predictions = (
+            self.adjust_predictions(future_predictions)
+            if self.use_sentiment_analysis
+            else future_predictions
+        )
 
-        # Generate a timeline plot including training data and future predictions.
         plot_buffer = self.plot_full_timeline(
             train_data=full_data,
             train_dates=train_dates,
@@ -371,31 +377,56 @@ class StockPredictorLSTM:
             future_pred=final_predictions,
             ticker=ticker,
             future_dates=future_dates,
-            future_actual=future_actual
+            future_actual=future_actual,
         )
-        return final_predictions, plot_buffer
+        return plot_buffer
 
 
-# === Test-run of the predictor ===
+def main():
+    # Get the ticker from command line arguments.
+    if len(sys.argv) > 1:
+        ticker = sys.argv[1]
+        if isinstance(ticker, str):
+            ticker = ticker.upper()
 
-# Create an instance of the StockPredictorLSTM with customized parameters.
-predictor = StockPredictorLSTM(
-    time_step=60,
-    feature="Close",
-    epochs=20,
-    plot_window=90,  # Show the last n days in the plot or None for all data.
-    use_sentiment_analysis=False,
-    show_future_actual=True  # When True, the last days of data are used as actual future values for comparison.
-)
+    # ticker = "AAPL"  # Default ticker. Uncomment this line for testing.
 
-# Run the predictor with the specified ticker and date range.
-# Ensure the range covers enough days for training and future comparison.
-results, graph_image = predictor.run("AAPL", "2019-01-01", "2025-04-09", days_to_predict=31)
+    # Load LSTM parameters from the JSON file.
+    json_path = Path.home() / "Documents" / "StarZ Finance" / "ModelParameters.json"
+    with open(json_path, "r") as file:
+        data = json.load(file)
 
-# Display the resulting plot from the BytesIO buffer.
-graph_image.seek(0)
-img = Image.open(graph_image)
-plt.figure(figsize=(12, 6))
-plt.imshow(img)
-plt.axis("off")  # Hide axes for a cleaner look.
-plt.show()
+    lstm_config = jsonm.parse_lstm_parameters(data)
+
+    # Create an instance of the StockPredictorLSTM with customized parameters.
+    predictor = StockPredictorLSTM(
+        time_step=lstm_config["TimeStep"],
+        feature=lstm_config["Feature"],
+        lstm_units=lstm_config["LSTMUnits"],
+        dropout_rate=lstm_config["DropoutRate"],
+        epochs=lstm_config["Epochs"],
+        batch_size=lstm_config["BatchSize"],
+        optimizer=lstm_config["Optimizer"],
+        use_early_stopping=lstm_config["UseEarlyStopping"],
+        show_future_actual=lstm_config["ShowFutureActual"],
+        use_sentiment_analysis=lstm_config["UseSentimentAnalysis"],
+        scaling_factor=lstm_config["ScalingFactor"],
+        plot_window=lstm_config["PlotWindow"],
+    )
+
+    graph_image = predictor.run(
+        ticker=ticker,
+        start_date=lstm_config["StartDate"],
+        end_date=lstm_config["EndDate"],
+        days_to_predict=lstm_config["DaysToPredict"],
+    )
+
+    graph_image.seek(0)
+    base64_image = base64.b64encode(graph_image.getvalue()).decode("utf-8")
+    print(
+        base64_image
+    )  # This is the base64 encoded image data that gets returned to the StarZ Finance app.
+
+
+if __name__ == "__main__":
+    main()

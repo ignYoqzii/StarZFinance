@@ -120,10 +120,4 @@
   <data name="Test" xml:space="preserve">
     <value>This is a test.</value>
   </data>
-  <data name="Test2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Test3" xml:space="preserve">
-    <value />
-  </data>
 </root>
