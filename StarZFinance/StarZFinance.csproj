@@ -87,6 +87,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="Scripts\GRUModel.py">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Scripts\JSONManager.py">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

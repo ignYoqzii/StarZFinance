@@ -16,16 +16,12 @@ namespace StarZFinance.Classes
         // Path to the Python executable
         private static readonly string pythonExe = Path.Combine(appBaseDirectory, "EmbeddedPython", "python.exe");
 
-        public static void PredictWithARIMA()
-        {
-        }
-
-        public static string? PredictWithLSTM(string ticker)
+        public static string? Predict(string ticker, string scriptName)
         {
             try
             {
                 // Path to the LSTMModel.py script
-                string scriptPath = Path.Combine(scriptsDirectory, "LSTMModel.py");
+                string scriptPath = Path.Combine(scriptsDirectory, scriptName);
 
                 // Ensure the script file exists
                 if (!File.Exists(scriptPath))
@@ -59,10 +55,6 @@ namespace StarZFinance.Classes
                 StarZMessageBox.ShowDialog($"An error occurred: {ex.Message}", "Error!", false);
                 return null;
             }
-        }
-
-        public static void PredictWithGRU()
-        {
         }
     }
 }

@@ -90,19 +90,19 @@ namespace StarZFinance.Pages
                     break;
 
                 case Model.LSTM:
-                    await HandleLSTMPredictions();
-                    PredictionStatusTextBlock.Text = "";
+                    await HandlePredictions("LSTMModel.py");
                     break;
 
                 case Model.GRU:
-                    // GRU logic here
+                    await HandlePredictions("GRUModel.py");
                     break;
             }
+            PredictionStatusTextBlock.Text = "";
         }
 
-        private async Task HandleLSTMPredictions()
+        private async Task HandlePredictions(string scriptName)
         {
-            string? result = await Task.Run(() => PythonManager.PredictWithLSTM(SelectedTicker!));
+            string? result = await Task.Run(() => PythonManager.Predict(SelectedTicker!, scriptName));
             if (result != null)
             {
                 try

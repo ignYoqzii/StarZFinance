@@ -53,8 +53,21 @@ namespace StarZFinance.Classes
                     new(Parameter.ScalingFactor, 0.5)
                 } },
                 { Model.GRU, new() {
-                    new(Parameter.Epochs, 150),
-                    new(Parameter.Optimizer, "Adam")
+                    new(Parameter.StartDate, "2020-01-01"),
+                    new(Parameter.EndDate, DateTime.Now.ToString("yyyy-MM-dd")),
+                    new(Parameter.Feature, "Close"),
+                    new(Parameter.ShowFutureActual, false),
+                    new(Parameter.DaysToPredict, 5),
+                    new(Parameter.PlotWindow, 0),
+                    new(Parameter.TimeStep, 60),
+                    new(Parameter.GRUUnits, 50),
+                    new(Parameter.DropoutRate, 0.2),
+                    new(Parameter.Epochs, 15),
+                    new(Parameter.BatchSize, 32),
+                    new(Parameter.Optimizer, "adam"),
+                    new(Parameter.UseEarlyStopping, false),
+                    new(Parameter.UseSentimentAnalysis, false),
+                    new(Parameter.ScalingFactor, 0.5)
                 } }
             };
         }
@@ -128,6 +141,7 @@ namespace StarZFinance.Classes
             { Parameter.ShowFutureActual, "Whether to show actual future values with the predictions to evaluate model accuracy." },
             { Parameter.TimeStep, "The number of previous time steps to consider for predicting the next value." },
             { Parameter.LSTMUnits, "The number of units (neurons) in each LSTM layer." },
+            { Parameter.GRUUnits, "The number of units (neurons) in each GRU layer." },
             { Parameter.DaysToPredict, "The number of days to predict." },
             { Parameter.UseEarlyStopping, "Whether to use early stopping to prevent overfitting." },
             { Parameter.UseSentimentAnalysis, "Whether to adjust predictions based on sentiment analysis." },
@@ -207,6 +221,7 @@ namespace StarZFinance.Classes
         ShowFutureActual,
         TimeStep,
         LSTMUnits,
+        GRUUnits,
         DaysToPredict,
         UseEarlyStopping,
         UseSentimentAnalysis,
