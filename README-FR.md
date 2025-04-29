@@ -18,7 +18,9 @@ StarZ Finance est notre **projet final au Cégep**, incarnant l'aboutissement de
 - **C# & XAML** : Pour une interface utilisateur robuste et esthétique.  
 - **Python** : Pour intégrer des scripts IA et de traitement de données.  
 - **API Yahoo Finance** : Pour récupérer des données de marché en temps réel.  
-- **LSTM (Long Short-Term Memory)** : Le cœur du modèle financier basé sur l'IA.  
+- **LSTM (Long Short-Term Memory)** : Le cœur du modèle financier basé sur l'IA.
+- **GRU**: Modèle additionnel pour comparer avec le LSTM.
+- **ARIMA**: Le modèle mathématique.
 
 ---
 

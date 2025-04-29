@@ -20,7 +20,9 @@ StarZ Finance is our **final project at Cegep**, representing the culmination of
 - **C# & XAML**: For building a robust and visually appealing user interface.  
 - **Python**: For integrating AI and data processing scripts.  
 - **Yahoo Finance API**: For retrieving real-time market data.  
-- **LSTM (Long Short-Term Memory)**: The backbone of the AI-powered financial model.  
+- **LSTM (Long Short-Term Memory)**: The backbone of the AI-powered financial model.
+- **GRU**: Additional model to compare with LSTM.
+- **ARIMA**: The mathematical model.
 
 ---
 
