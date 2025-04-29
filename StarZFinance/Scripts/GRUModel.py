@@ -73,7 +73,7 @@ class StockPredictorGRU:
     def prepare_data(self, data: pd.DataFrame) -> Tuple[np.ndarray, np.ndarray]:
         data_values = data[self.feature].values.reshape(-1, 1).astype(float)
         self.scaler = MinMaxScaler(feature_range=(0, 1))
-        data_scaled = self.scaler.fit_transform(data_values)
+        data_scaled = self.scaler.transform(data_values)
 
         X, y = [], []
         for i in range(self.time_step, len(data_scaled)):
@@ -221,6 +221,10 @@ class StockPredictorGRU:
                 f"Not enough data. Need at least {self.time_step + days_to_predict} days."
             )
 
+        full_feature_data = stock_data[[self.feature]].values.astype(float)
+        self.scaler = MinMaxScaler(feature_range=(0, 1))
+        self.scaler.fit(full_feature_data)
+
         if self.show_future_actual:
             training_data = stock_data.iloc[:-days_to_predict]
             future_actual = stock_data.iloc[-days_to_predict:][
@@ -276,6 +280,8 @@ def main():
         ticker = sys.argv[1]
         if isinstance(ticker, str):
             ticker = ticker.upper()
+
+    # ticker = "AAPL"  # Default ticker. Uncomment this line for testing.
 
     json_path = Path.home() / "Documents" / "StarZ Finance" / "ModelParameters.json"
     with open(json_path, "r") as file:

@@ -99,9 +99,8 @@ class StockPredictorLSTM:
         """
         # Extract feature values and ensure they are in float format
         data_values = data[self.feature].values.reshape(-1, 1).astype(float)
-        # Create scaler to transform the data to [0, 1] range
-        self.scaler = MinMaxScaler(feature_range=(0, 1))
-        data_scaled = self.scaler.fit_transform(data_values)
+        # Utiliser transform() puisque le scaler est déjà ajusté sur toutes les données
+        data_scaled = self.scaler.transform(data_values)
 
         X, y = [], []
         # Loop to create the sliding windows for the time series data
@@ -315,7 +314,15 @@ class StockPredictorLSTM:
         self, ticker: str, start_date: str, end_date: str, days_to_predict: int = 5
     ) -> io.BytesIO:
         """
-        Execute the entire workflow: fetch data, prepare, train, predict, and plot.
+        Execute the entire workflow: fetch data, prepare, train, predict, and p
+        Parameters:
+        - ticker: Stock ticker symbol.
+        - start_date: Start date for historical data in "YYYY-MM-DD" format.
+        - end_date: End date for historical data in "YYYY-MM-DD" format.
+        - days_to_predict: Number of days in the future to forecast.
+
+        Returns:
+        - BytesIO object containing the plot image.
 
         Parameters:
         - ticker: Stock ticker symbol.
@@ -332,11 +339,17 @@ class StockPredictorLSTM:
                 f"Not enough data. Need at least {self.time_step + days_to_predict} days."
             )
 
+        full_feature_data = stock_data[[self.feature]].values.astype(float)
+        self.scaler = MinMaxScaler(feature_range=(0, 1))
+        self.scaler.fit(full_feature_data)
+
         if self.show_future_actual:
             training_data = stock_data.iloc[:-days_to_predict]
-            future_actual = stock_data.iloc[-days_to_predict:][
-                [self.feature]
-            ].values.astype(float)
+            future_actual = (
+                stock_data.iloc[-days_to_predict:][self.feature]
+                .values.reshape(-1, 1)
+                .astype(float)
+            )
             train_dates = training_data.index
             future_dates = stock_data.iloc[-days_to_predict:].index
         else:

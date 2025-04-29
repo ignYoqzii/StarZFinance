@@ -40,7 +40,7 @@ namespace StarZFinance.Classes
                     Arguments = arguments,
                     RedirectStandardOutput = true,
                     UseShellExecute = false,
-                    CreateNoWindow = true
+                    CreateNoWindow = false
                 };
 
                 // Start the process and read the output
